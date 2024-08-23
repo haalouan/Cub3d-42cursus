@@ -1,4 +1,5 @@
-SRCS = cub3d.c ./parssing/parssing.c ./sources/get_next_line/get_next_line.c
+SRCS = cub3d.c ./parssing/parssing.c ./sources/get_next_line/get_next_line.c ./parssing/textures.c \
+	./parssing/check.c ./parssing/allocation.c 
 OBJS = ${SRCS:.c=.o}
 NAME = cub3d
 CC = cc
