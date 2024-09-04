@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:17:28 by haalouan          #+#    #+#             */
-/*   Updated: 2024/08/23 15:26:14 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:18:20 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ char	**allocate_str(char **str)
 	return (s);
 }
 
-t_textures	*allocate_textures(void)
+t_map	*allocate_textures(void)
 {
-	t_textures	*textures;
+	t_map	*textures;
 
 	textures = NULL;
-	textures = (t_textures *)malloc(sizeof(t_textures) + 1);
+	textures = (t_map *)malloc(sizeof(t_map) + 1);
 	if (!textures)
 		exit(EXIT_FAILURE);
 	textures->map = NULL;

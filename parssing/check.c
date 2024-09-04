@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:18:29 by haalouan          #+#    #+#             */
-/*   Updated: 2024/08/23 15:18:59 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:50:07 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_line_spaces(char *str)
 	return (0);
 }
 
-int	parse_args(char *str)
+int	parsse_args(char *str)
 {
 	int	i;
 

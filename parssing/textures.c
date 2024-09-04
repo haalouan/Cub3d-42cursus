@@ -6,13 +6,13 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:53:33 by haalouan          #+#    #+#             */
-/*   Updated: 2024/08/23 15:23:56 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/04 23:05:10 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parssing.h"
 
-char    *put_textures(char *str, int plus)
+char    *put_map(char *str, int plus)
 {
     char    *s;
     int     i;
@@ -23,12 +23,12 @@ char    *put_textures(char *str, int plus)
         i++;
     s = ft_strdup(str + i);
     s = ft_strtrim(s, "\n");
-    // printf("%s", s);
+	s = escape_spaces(s);
     return (s);
 }
 
 
-void	check_so(char **str, t_textures *textures)
+void	put_so(char **str, t_map *textures)
 {
 	int	i;
 	int	flag;
@@ -37,8 +37,9 @@ void	check_so(char **str, t_textures *textures)
 	i = 0;
 	flag = 0;
     save = 0;
-	while (str[i])
+	while (str && str[i] && str[i][0] != '1')
 	{
+		str[i] = escape_spaces(str[i]);
 		if (ft_strncmp(str[i], "SO", 2) == 0 && (str[i][2] == ' '
             || str[i][2] == '\t'))
 		{
@@ -48,12 +49,15 @@ void	check_so(char **str, t_textures *textures)
 		i++;
 	}
 	if (flag != 1)
-		exit(printf("ERROR IN MAP\n"));
+		exit(printf("ERROR IN MAP (SO)\n"));
     if (flag == 1)
-        textures->so = put_textures(str[save], 2);
+    {
+		str[save] = escape_spaces(str[save]);
+		textures->so = put_map(str[save], 2);
+	}
 }
 
-void	check_no(char **str, t_textures *textures)
+void	put_no(char **str, t_map *textures)
 {
 	int	i;
 	int	flag;
@@ -61,8 +65,9 @@ void	check_no(char **str, t_textures *textures)
 
 	i = 0;
 	flag = 0;
-	while (str[i])
+	while (str && str[i] && str[i][0] != '1')
 	{
+		str[i] = escape_spaces(str[i]);
 		if (ft_strncmp(str[i], "NO", 2) == 0 && (str[i][2] == ' ' || str[i][2] == '\t'))
 		{
             flag++;
@@ -71,12 +76,15 @@ void	check_no(char **str, t_textures *textures)
 		i++;
 	}
 	if (flag != 1)
-		exit(printf("ERROR IN MAP\n"));
+		exit(printf("ERROR IN MAP (NO)\n"));
     if (flag == 1)
-        textures->no = put_textures(str[save], 2);
+    {
+		str[save] = escape_spaces(str[save]);
+		textures->no = put_map(str[save], 2);
+	}
 }
 
-void	check_we(char **str, t_textures *textures)
+void	put_we(char **str, t_map *textures)
 {
 	int	i;
 	int	flag;
@@ -84,8 +92,9 @@ void	check_we(char **str, t_textures *textures)
 
 	i = 0;
 	flag = 0;
-	while (str[i])
+	while (str && str[i] && str[i][0] != '1')
 	{
+		str[i] = escape_spaces(str[i]);
 		if (ft_strncmp(str[i], "WE", 2) == 0 && (str[i][2] == ' ' || str[i][2] == '\t'))
 		{
             flag++;
@@ -94,12 +103,15 @@ void	check_we(char **str, t_textures *textures)
 		i++;
 	}
 	if (flag != 1)
-		exit(printf("ERROR IN MAP\n"));
+		exit(printf("ERROR IN MAP (WE)\n"));
     if (flag == 1)
-        textures->we = put_textures(str[save], 2);
+    {
+		str[save] = escape_spaces(str[save]);
+		textures->we = put_map(str[save], 2);
+	}
 }
 
-void	check_ea(char **str, t_textures *textures)
+void	put_ea(char **str, t_map *textures)
 {
 	int	i;
     int save;
@@ -107,8 +119,9 @@ void	check_ea(char **str, t_textures *textures)
 
 	i = 0;
 	flag = 0;
-	while (str[i])
+	while (str && str[i] && str[i][0] != '1')
 	{
+		str[i] = escape_spaces(str[i]);
 		if (ft_strncmp(str[i], "EA", 2) == 0 && (str[i][2] == ' ' || str[i][2] == '\t'))
 		{
             flag++;
@@ -117,12 +130,15 @@ void	check_ea(char **str, t_textures *textures)
 		i++;
 	}
 	if (flag != 1)
-		exit(printf("ERROR IN MAP\n"));
-    if (flag == 1)
-        textures->ea = put_textures(str[save], 2);
+		exit(printf("ERROR IN MAP (EA)\n"));
+   	if (flag == 1)
+    {
+		str[save] = escape_spaces(str[save]);
+		textures->ea = put_map(str[save], 2);
+	}
 }
 
-void	check_f(char **str, t_textures *textures)
+void	put_f(char **str, t_map *textures)
 {
 	int	i;
     int save;
@@ -130,8 +146,9 @@ void	check_f(char **str, t_textures *textures)
 
 	i = 0;
 	flag = 0;
-	while (str[i])
+	while (str && str[i] && str[i][0] != '1')
 	{
+		str[i] = escape_spaces(str[i]);
 		if (ft_strncmp(str[i], "F", 1) == 0 && (str[i][1] == ' ' || str[i][1] == '\t'))
 		{
             flag++;
@@ -140,12 +157,15 @@ void	check_f(char **str, t_textures *textures)
 		i++;
 	}
 	if (flag != 1)
-		exit(printf("ERROR IN MAP\n"));
+		exit(printf("ERROR IN MAP (F)\n"));
     if (flag == 1)
-        textures->f = put_textures(str[save], 1);
+    {
+		str[save] = escape_spaces(str[save]);
+		textures->f = put_map(str[save], 1);
+	}
 }
 
-void	check_c(char **str, t_textures *textures)
+void	put_c(char **str, t_map *textures)
 {
 	int	i;
     int save;
@@ -153,8 +173,9 @@ void	check_c(char **str, t_textures *textures)
 
 	i = 0;
 	flag = 0;
-	while (str[i])
+	while (str && str[i] && str[i][0] != '1')
 	{
+		str[i] = escape_spaces(str[i]);
 		if (ft_strncmp(str[i], "C", 1) == 0 && (str[i][1] == ' ' || str[i][1] == '\t'))
 		{
             flag++;
@@ -163,17 +184,47 @@ void	check_c(char **str, t_textures *textures)
 		i++;
 	}
 	if (flag != 1)
-		exit(printf("ERROR IN MAP\n"));
+		exit(printf("ERROR IN MAP (C)\n"));
     if (flag == 1)
-        textures->c = put_textures(str[save], 1);
+    {
+		str[save] = escape_spaces(str[save]);
+		textures->c = put_map(str[save], 1);
+	}
+
 }
 
-void	parse_textures(char **str, t_textures *textures)
+void	put_0_1(char **str, t_map *textures)
 {
-	check_no(str, textures);
-	check_so(str, textures);
-	check_we(str, textures);
-	check_ea(str, textures);
-	check_f(str, textures);
-	check_c(str, textures);
+	int	i;
+	int	k;
+
+	i = 0;
+	k = 0;
+	i = checkMapValid(str);
+	textures->map = allocate_map(count_map(str + i));
+	while (str && str[i])
+	{
+		str[i] = ft_strtrim(str[i], "\n");
+		textures->map[k] = ft_strdup(str[i]);
+		k++;
+		i++;
+	}
+}
+
+void	parsse_textures(char **str, t_map *textures)
+{
+	put_no(str, textures);
+	put_so(str, textures);
+	put_we(str, textures);
+	put_ea(str, textures);
+	put_f(str, textures);
+	put_c(str, textures);
+	put_0_1(str, textures);
+}
+
+char	*escape_spaces(char *str)
+{
+	str = ft_strtrim(str, " ");
+	str = ft_strtrim(str, "\t");
+	return (str);
 }
