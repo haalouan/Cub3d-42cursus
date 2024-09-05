@@ -6,13 +6,13 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:56:23 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/04 23:06:38 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/05 13:39:45 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void parssing(int arc, char **arv)
+t_map	*parssing(int arc, char **arv)
 {
 	ssize_t fd;
 	int i;
@@ -40,10 +40,11 @@ void parssing(int arc, char **arv)
 	all_lines = parsse_all_lines(all_lines);
 	parsse_textures(all_lines, textures);
 	parsse_map(textures->map);
-	print_textures(textures);
+	// print_textures(textures);
+	return (textures);
 }
 
-char **parsse_all_lines(char **str)
+char	**parsse_all_lines(char **str)
 {
 	char **s;
 	int i;
@@ -59,7 +60,7 @@ char **parsse_all_lines(char **str)
 	return (s);
 }
 
-void check_map(char **str)
+void	check_map(char **str)
 {
 	int i;
 	int k;

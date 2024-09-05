@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:58:11 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/04 21:56:51 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/05 13:40:19 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct  s_map
 }	t_map;
 
 int		parsse_args(char *str);
-void	parssing(int arc, char **arv);
+t_map	*parssing(int arc, char **arv);
 char	**allocate_all_lines(int fd);
 char	**parsse_all_lines(char **str);
 char	**allocate_str(char **str);

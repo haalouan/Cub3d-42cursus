@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:53:35 by haalouan          #+#    #+#             */
-/*   Updated: 2024/08/22 15:54:27 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/05 13:39:03 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	main(int arc, char **arv)
 {
-	parssing(arc, arv);
+	t_map	*text;
+
+	text = parssing(arc, arv);
 	return (0);
 }
