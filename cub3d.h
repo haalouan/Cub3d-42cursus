@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:52:54 by haalouan          #+#    #+#             */
-/*   Updated: 2024/08/22 13:22:04 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/05 13:42:46 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,11 @@
 # include <unistd.h>
 # include <math.h>
 # include <fcntl.h>
-# include <string.h>//
-# include "mlx.h"//
 # include "sources/get_next_line/get_next_line.h"
 # include "sources/libft/libft.h"
 # include "parssing/parssing.h"
 
-// screen width
-// screen height
-// tile size
+
 
 
 #endif

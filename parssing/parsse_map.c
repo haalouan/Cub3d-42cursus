@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:16:29 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/04 23:09:42 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/07 10:09:48 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,6 @@ void protecte_map(char c)
         exit(printf("invalid map (unaccepted character)\n"));
 }
 
-void    checkLockPlayer(char **str, int i, int k)
-{
-    if (k < (int)ft_strlen(str[i + 1]) && k < (int)ft_strlen(str[i - 1]))
-    {
-        if (str[i + 1][k] == '1' && str[i - 1][k] == '1'
-            && str[i][k + 1] == '1' && str[i - 1][k] == '1')
-            exit(printf("invalid map (player locked)\n"));
-    }
-    else
-        exit(printf("invalid map (player locked)\n"));
-}
-
 void check_dup(char **str)
 {
     int i;
@@ -118,10 +106,7 @@ void    check_empty_line(char **str)
             if (str[i][k] == '0')
                 checkValidFor0(str, i, k);
             if (str[i][k] == 'E' || str[i][k] == 'W' || str[i][k] == 'S' || str[i][k] == 'N')
-            {
                 checkValidForPlayer(str, i, k);
-                checkLockPlayer(str, i, k);
-            }
             k++;
         }
         i++;

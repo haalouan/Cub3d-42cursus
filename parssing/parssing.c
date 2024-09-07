@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:56:23 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/05 13:39:45 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:06:48 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 t_map	*parssing(int arc, char **arv)
 {
-	ssize_t fd;
-	int i;
-	char **all_lines;
-	char *line;
-	t_map *textures;
+	ssize_t	fd;
+	int		i;
+	char	**all_lines;
+	char	*line;
+	t_map	*textures;
 
 	(void)arc;
 	i = 0;
@@ -40,7 +40,7 @@ t_map	*parssing(int arc, char **arv)
 	all_lines = parsse_all_lines(all_lines);
 	parsse_textures(all_lines, textures);
 	parsse_map(textures->map);
-	// print_textures(textures);
+	print_textures(textures);
 	return (textures);
 }
 
