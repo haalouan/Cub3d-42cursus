@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:16:29 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/07 10:09:48 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/07 10:19:44 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void    checkValidForPlayer(char **str, int i, int k)
 
 void protecte_map(char c)
 {
-    if (c != '0' && c != '1' && c != 'E' && c != 'N' && c != 'S' && c != 'W')
+    if (c != '0' && c != '1' && c != 'E' && c != 'N' && c != 'S' && c != 'W' && c != ' ' && c != '\t')
         exit(printf("invalid map (unaccepted character)\n"));
 }
 
