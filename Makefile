@@ -10,7 +10,8 @@ LIBFT_DIR = sources/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)  
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@echo "Cub3d is ready"
 
 all: ${NAME}
 
@@ -18,15 +19,17 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
 %.o: %.c cub3d.h
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@${RM} ${OBJS}
-	@$(MAKE) -C $(LIBFT_DIR) clean  # Clean in the libft directory
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@echo "Cub3d is cleaned"
+	@echo "Libft is cleaned"
 
 fclean: clean
 	@${RM} ${NAME}
-	@$(MAKE) -C $(LIBFT_DIR) fclean  # Full clean in the libft directory
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

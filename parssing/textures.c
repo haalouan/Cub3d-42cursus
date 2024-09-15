@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:53:33 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/04 23:05:10 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/15 16:18:09 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,8 @@ void	put_0_1(char **str, t_map *textures)
 	textures->map = allocate_map(count_map(str + i));
 	while (str && str[i])
 	{
+		if (str[i][0] == '\n')
+			exit(printf("Error (Empty line in Map)\n"));
 		str[i] = ft_strtrim(str[i], "\n");
 		textures->map[k] = ft_strdup(str[i]);
 		k++;
