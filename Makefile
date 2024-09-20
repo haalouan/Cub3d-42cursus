@@ -1,10 +1,11 @@
-SRCS = cub3d.c ./parssing/parssing.c ./sources/get_next_line/get_next_line.c ./parssing/textures.c \
-	./parssing/check.c ./parssing/allocation.c ./parssing/parssing_utils.c ./parssing/parsse_map.c
+SRCS = cub3d.c ./parssing/parssing.c ./sources/get_next_line/get_next_line.c ./parssing/parssTextures.c \
+	./parssing/check.c ./parssing/allocation.c ./parssing/parssUtils.c ./parssing/parssMap.c ./parssing/parssText.c\
+	./parssing/free.c
 OBJS = ${SRCS:.c=.o}
 NAME = cub3d
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 LIBFT_DIR = sources/libft
 LIBFT = $(LIBFT_DIR)/libft.a

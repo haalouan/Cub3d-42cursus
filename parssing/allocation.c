@@ -6,27 +6,57 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:17:28 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/04 18:18:20 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:33:03 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parssing.h"
 
-char	**allocate_all_lines(int fd)
+char	**put_all_lines(char **str, char **arv)
+{
+	int		fd;
+	int		i;
+	char	*line;
+
+	i = 0;
+	fd = open(arv[1], O_RDONLY);
+	if (fd < 0)
+		exit(printf("READ FAILED\n"));
+	line = get_next_line(fd);
+	while (line)
+	{
+		str[i] = ft_strdup(line);
+		free(line);
+		line = get_next_line(fd);
+		i++;
+	}
+	close(fd);
+	return (str);
+}
+
+char	**allocate_all_lines(int fd, char **arv)
 {
 	char	**all_lines;
+	char	*line;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	while (get_next_line(fd))
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
 		i++;
+	}
+	close(fd);
 	all_lines = (char **)malloc(sizeof(char *) * (i + 1) + 1);
 	if (!all_lines)
 		exit(EXIT_FAILURE);
 	while (j <= i)
 		all_lines[j++] = NULL;
+	all_lines = put_all_lines(all_lines, arv);
 	return (all_lines);
 }
 

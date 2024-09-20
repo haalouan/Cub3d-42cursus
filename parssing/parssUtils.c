@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parssing_utils.c                                   :+:      :+:    :+:   */
+/*   parssUtils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:43:09 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/05 15:05:08 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:03:47 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,43 @@ int	count_map(char **str)
 		i++;
 	return (i);
 }
-void	print_textures(t_map *textures)
+
+void	manage_error(char **str, t_map *textures)
 {
-	printf("%s\n",textures->c);
-	printf("%s\n",textures->f);
-	printf("%s\n",textures->no);
-	printf("%s\n",textures->so);
-	printf("%s\n",textures->ea);
-	printf("%s\n",textures->we);
-	int g = 0;
-	while (textures->map[g])
+	free_all_lines(str);
+	free_map(textures);
+	exit(printf("ERROR IN MAP\n"));
+}
+
+void	protecte_map(char **all_lines, t_map *textures, int i, int k)
+{
+	if (textures->map[i][k] != '0' && textures->map[i][k] != '1'
+		&& textures->map[i][k] != 'E' && textures->map[i][k] != 'N'
+		&& textures->map[i][k] != 'S' && textures->map[i][k] != 'W'
+		&& textures->map[i][k] != ' ' && textures->map[i][k] != '\t')
+		manage_error(all_lines, textures);
+}
+
+void	check_dup(char **all_lines, t_map *textures)
+{
+	int	i;
+	int	k;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	while (textures->map && textures->map[i])
 	{
-		printf("%s\n", textures->map[g]);
-		g++;
+		k = 0;
+		while (textures->map[i] && textures->map[i][k])
+		{
+			if (textures->map[i][k] == 'E' || textures->map[i][k] == 'N'
+				|| textures->map[i][k] == 'S' || textures->map[i][k] == 'W')
+				flag++;
+			k++;
+		}
+		i++;
 	}
+	if (flag != 1)
+		manage_error(all_lines, textures);
 }
