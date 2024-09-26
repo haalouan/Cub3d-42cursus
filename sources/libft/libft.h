@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:06:44 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/20 19:23:05 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:09:20 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ int		ft_strncmp(const char *str1, const char *str2, size_t n);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strchr(const char *str, int c);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
-
+void	*ft_malloc(size_t size, int flag);
 #endif
