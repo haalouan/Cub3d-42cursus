@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:57:12 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/26 17:20:12 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:06:04 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_wall_values(t_wall *w)
 {
 	w->t = ft_malloc(sizeof(t_bitmap), 0);
-	w->t->texture = mlx_load_png("execution/textures/stone_bricks.png");
+	w->t->texture = mlx_load_png("execution/textures/wood.png");
 	w->t->arr = (uint32_t *)w->t->texture->pixels;
 	w->distance_to_projection = (WIDTH * BLOCK_W / 2)
 		/ tan(FOV / 2 * (M_PI / 180));
@@ -43,6 +43,8 @@ void	update_wall_values(t_wall *w, t_ray *rays, t_map_e *m)
 	if (w->t->offset_x < 0)
 		w->t->offset_x = 0;
 	w->t->scaling_factor = ((double)w->t->texture->height / w->wall_height);
+	// if (w->wall_top == w->wall_bot)
+	// 	printf("angle %f\n", rays->angle);
 }
 
 void	draw_wall(t_wall *w, t_map_e *m, int x)

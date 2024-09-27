@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 13:52:59 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/26 13:34:01 by shamdoun         ###   ########.fr       */
+/*   Created: 2027/09/27 13:52:59 by shamdoun          #+#    #+#             */
+/*   Updated: 2024/09/27 19:07:07 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	move_up(t_player *p)
 
 	old_x = p->x_p;
 	old_y = p->y_p;
-	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180)) * 4;
-	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180)) * 4;
+	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180)) * 7;
+	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180)) * 7;
 	if (wall_contact(p))
 	{
 		p->x_p = old_x;
@@ -52,8 +52,8 @@ void	move_down(t_player *p)
 
 	old_x = p->x_p;
 	old_y = p->y_p;
-	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180)) * -4;
-	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180)) * -4;
+	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180)) * -7;
+	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180)) * -7;
 	if (wall_contact(p))
 	{
 		p->x_p = old_x;
@@ -68,8 +68,8 @@ void	move_right(t_player *p)
 
 	old_x = p->x_p;
 	old_y = p->y_p;
-	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180) + (M_PI / 2)) * 4;
-	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180) + (M_PI / 2)) * 4;
+	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180) + (M_PI / 2)) * 7;
+	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180) + (M_PI / 2)) * 7;
 	if (wall_contact(p))
 	{
 		p->x_p = old_x;
@@ -84,8 +84,8 @@ void	move_left(t_player *p)
 
 	old_x = p->x_p;
 	old_y = p->y_p;
-	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180) - (M_PI / 2)) * 4;
-	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180) - (M_PI / 2)) * 4;
+	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180) - (M_PI / 2)) * 7;
+	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180) - (M_PI / 2)) * 7;
 	if (wall_contact(p))
 	{
 		p->x_p = old_x;

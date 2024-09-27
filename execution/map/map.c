@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 19:32:54 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/26 17:06:12 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:09:25 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	draw_3d_map(void)
 	if (!map3d)
 		exit (1);
 	init_map_values(map3d);
-	draw_map(map3d->interface->new_img);
 	draw_3d_walls(map3d);
+	draw_mini_map(map3d);
 	if (mlx_image_to_window(map3d->interface->mlx_ptr,
 			map3d->interface->new_img, 0, 0))
 	{

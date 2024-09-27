@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 22:13:10 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/26 17:15:07 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:10:51 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	key_func(void *param)
 
 	m = (t_map_e *)param;
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_RIGHT))
-		rotate_angle(m->player, -2);
+		rotate_angle(m->player, -6);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_LEFT))
-		rotate_angle(m->player, 2);
+		rotate_angle(m->player, 6);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_D))
 		move_right(m->player);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_A))

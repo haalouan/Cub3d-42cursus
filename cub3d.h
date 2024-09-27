@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:52:54 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/26 16:39:15 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:33:03 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ typedef struct mlx_v
 	mlx_t		*mlx_ptr;
 	mlx_image_t	*new_img;
 	char		*title;
-	int			width;
-	int			height;
 }	t_mlx;
 
 typedef struct ray_calc_v
@@ -94,7 +92,10 @@ typedef struct map_v
 	char			*type;
 	struct mlx_v	*interface;
 	int				**map_values;
+	mlx_texture_t	**all_textures;
 	struct player_v	*player;
+	int				width;
+	int				height;
 }	t_map_e;
 
 typedef struct ray_v
