@@ -5,7 +5,7 @@ OBJS = ${SRCS:.c=.o}
 NAME = cub3d
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 LIBFT_DIR = sources/libft
 LIBFT = $(LIBFT_DIR)/libft.a
