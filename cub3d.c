@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:53:35 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/27 21:35:24 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:43:10 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void	draw_map_v1(t_map_e *m, char **data, int flag)
 			k = ft_strlen(data[i]);
 			while (j < k && j < m->width)
 			{
-				if (data[i][j] != ' ')
+				if (data[i][j] != ' ' && data[i][j] != 9)
 				{
 					draw_block_v1(m->interface->new_img, (i + 1) * (BLOCK_L),
 						(j + 1) * (BLOCK_W), data[i][j]);
