@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:52:54 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/27 21:28:04 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:16:36 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,10 +148,10 @@ typedef struct data_v
 	struct data_v	*next;
 }	t_data;
 
-void	move_right(t_player *p);
-void	move_left(t_player *p);
-void	move_down(t_player *p);
-void	move_up(t_player *p);
+void	move_right(t_player *p, char **mapValues);
+void	move_left(t_player *p, char **mapValues);
+void	move_down(t_player *p, char **mapValues);
+void	move_up(t_player *p, char **mapValues);
 void	key_func(void *param);
 void	terminate_game(t_map_e *m);
 void	update_map(t_map_e *m);
@@ -167,7 +167,7 @@ void	ft_lstadd_back(t_ray **lst, t_ray *new);
 void	draw_3d_map(void);
 t_ray	*ft_lstnew(double x);
 void	draw_mini_map(t_map_e *m);
-int		wall_contact(t_player *p);
+int		wall_contact(t_player *p, char **mapValues);
 int		get_map_e_value(t_player *p, int x, int y);
 void	draw_circle(t_map_e *map, int x_center, int y_center, int radius);
 void	init_player_instance(t_map_e *map3d);
@@ -180,7 +180,7 @@ void	init_gradient(t_gradient *gradient);
 void	draw_sky(t_map_e *m, int x, t_wall *w);
 void	draw_floor(t_wall *w, t_map_e *m, int x);
 void	apply_dda_algorithm(t_map_e *m);
-int		mouvement_is_blocked(int map_y, int map_x, double angle);
+// int		mouvement_is_blocked(int map_y, int map_x, double angle);
 int		ray_is_facing_left(double angle);
 int		ray_is_facing_down(double angle);
 long	calculate_magnitude(t_player *player, double x, double y);
@@ -200,5 +200,6 @@ void	ft_lstadd_a_back(t_data **lst, t_data *new);
 t_data	*ft_lstnew_ad(void *address);
 void	draw_map(mlx_image_t *img);
 void	draw_map_v1(t_map_e *m, char **data, int flag);
+int	mouvement_is_blocked(char **mapValues, int map_y, int map_x, double angle);
 
 #endif

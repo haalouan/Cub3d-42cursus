@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:53:35 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/27 21:43:10 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:14:22 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int row_empty(char *s)
 	empty = 1;
 	while (s[i])
 	{
-		if (s[i] != ' ')
+		if (s[i] != ' ' && s[i] != 9)
 			empty = 0;
 		i++;
 	}
@@ -168,11 +168,6 @@ void	draw_map_v1(t_map_e *m, char **data, int flag)
 				j++;
 			}
 		}
-		// j = 0;
-		// while (j < m->width)
-		// {
-		// 	j++;
-		// }
 		i++;
 	}
 }
@@ -221,8 +216,7 @@ void	start_game(t_map *data)
 		exit (1);
 	init_all_values(map, data);
 	draw_map_v1(map, data->map, 0);
-	// draw_player(map);
-	printf("player x %f y %f\n", map->player->x_p, map->player->y_p);
+	draw_player(map);
 	if (mlx_image_to_window(map->interface->mlx_ptr,
 			map->interface->new_img, 0, 0))
 	{

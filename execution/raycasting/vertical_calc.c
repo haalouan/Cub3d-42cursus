@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 22:27:55 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/26 22:26:35 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:15:30 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ long	find_vertical_distance(t_map_e *m, t_ray **v, double angle)
 		map_x = (int)floor(fabs(x_inter) / BLOCK_W);
 		map_y = (int)floor(fabs(y_inter) / BLOCK_L);
 		if (map_x < 21 && map_y < 10
-			&& mouvement_is_blocked(map_y, map_x, angle))
+			&& mouvement_is_blocked(m->m_values, map_y, map_x, angle))
 			break ;
 		x_inter = x_inter + vertical->ax;
 		y_inter = y_inter + vertical->ay;

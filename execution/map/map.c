@@ -6,26 +6,30 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 19:32:54 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/27 19:09:25 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:10:56 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-extern int mapValues[20][21];
+// extern int mapValues[20][21];
 
-int	get_map_value(t_player *p, int x, int y)
+int	get_map_value(char **mapValues, t_player *p, int x, int y)
 {
-	return (mapValues[(int)floor((p->y_p + y)
-				/ BLOCK_L)][(int)floor((p->x_p + x) / BLOCK_L)]);
+	char v;
+	v = mapValues[(int)floor((p->y_p + y)
+				/ BLOCK_L)][(int)floor((p->x_p + x) / BLOCK_L)];
+	if (v == '1')
+		return (1);
+	return (0);
 }
 
-int	wall_contact(t_player *p)
+int	wall_contact(t_player *p, char **mapValues)
 {
-	if (get_map_value(p, 0, -20) || get_map_value(p, 20, 0)
-		|| get_map_value(p, -20, 0) || get_map_value(p, 0, 20)
-		|| get_map_value(p, -20, 20) || get_map_value(p, -20, -20)
-		|| get_map_value(p, 20, -20) || get_map_value(p, 20, 20))
+	if (get_map_value(mapValues, p, 0, -20) || get_map_value(mapValues, p, 20, 0)
+		|| get_map_value(mapValues, p, -20, 0) || get_map_value(mapValues, p, 0, 20)
+		|| get_map_value(mapValues, p, -20, 20) || get_map_value(mapValues, p, -20, -20)
+		|| get_map_value(mapValues, p, 20, -20) || get_map_value(mapValues, p, 20, 20))
 		return (1);
 	return (0);
 }

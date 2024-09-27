@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 22:13:10 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/27 21:34:08 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:07:23 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void	key_func(void *param)
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_LEFT))
 		rotate_angle(m->player, 6);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_D))
-		move_right(m->player);
+		move_right(m->player, m->m_values);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_A))
-		move_left(m->player);
+		move_left(m->player, m->m_values);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_W))
-		move_up(m->player);
+		move_up(m->player, m->m_values);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_S))
-		move_down(m->player);
+		move_down(m->player, m->m_values);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_ESCAPE))
 		terminate_game(m);
 	update_map(m);

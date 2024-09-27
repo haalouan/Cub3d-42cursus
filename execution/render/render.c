@@ -6,13 +6,13 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:18:04 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/26 17:17:38 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:19:04 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-extern int mapValues[10][21];
+// extern int mapValues[10][21];
 
 int	get_rgba(int r, int g, int b, int a)
 {
