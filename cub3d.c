@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:53:35 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/27 21:27:50 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:35:24 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,7 @@ void	start_game(t_map *data)
 		exit (1);
 	init_all_values(map, data);
 	draw_map_v1(map, data->map, 0);
-	draw_player(map);
+	// draw_player(map);
 	printf("player x %f y %f\n", map->player->x_p, map->player->y_p);
 	if (mlx_image_to_window(map->interface->mlx_ptr,
 			map->interface->new_img, 0, 0))

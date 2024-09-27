@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 22:13:10 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/27 21:30:13 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:34:08 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	terminate_game(t_map_e *m)
 	exit(1);
 }
 
-void	key_func_v1(void *param)
+void	key_func(void *param)
 {
 	t_map_e	*m;
 
