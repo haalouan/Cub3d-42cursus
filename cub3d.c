@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:53:35 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/27 20:47:14 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:27:50 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	draw_block_v1(mlx_image_t *img, int x, int y, char value)
 	}
 }
 
-double extract_angle(char *d)
+double extract_angle(char d)
 {
 	if (d == 'E')
 		return (0);
@@ -138,14 +138,12 @@ double extract_angle(char *d)
 
 void init_player_position(t_player *p, int i, int j, char direction)
 {
-	double angle;
-
 	p->x_p = j * BLOCK_W + 40;
 	p->y_p = i * BLOCK_L + 40;
 	p->angle = extract_angle(direction);
 }
 
-void	draw_map_v1(t_map_e *m, char **data)
+void	draw_map_v1(t_map_e *m, char **data, int flag)
 {
 	int	i;
 	int	j;
@@ -164,7 +162,7 @@ void	draw_map_v1(t_map_e *m, char **data)
 				{
 					draw_block_v1(m->interface->new_img, (i + 1) * (BLOCK_L),
 						(j + 1) * (BLOCK_W), data[i][j]);
-					if (ft_isalpha(data[i][j]))
+					if (!flag && ft_isalpha(data[i][j]))
 						init_player_position(m->player, i, j, data[i][j]);
 				}
 				j++;
@@ -185,6 +183,7 @@ void init_all_values(t_map_e *m, t_map *data)
 	// init_textures(m, data);
 	init_player(m);
 	calculate_dimensions(m, data);
+	m->m_values = data->map;
 	m->interface = malloc(sizeof(t_map));
 	if (!m->interface)
 	{
@@ -221,7 +220,9 @@ void	start_game(t_map *data)
 	if (!map)
 		exit (1);
 	init_all_values(map, data);
-	draw_map_v1(map, data->map);
+	draw_map_v1(map, data->map, 0);
+	draw_player(map);
+	printf("player x %f y %f\n", map->player->x_p, map->player->y_p);
 	if (mlx_image_to_window(map->interface->mlx_ptr,
 			map->interface->new_img, 0, 0))
 	{
@@ -232,6 +233,7 @@ void	start_game(t_map *data)
 		free(map);
 		exit (1);
 	}
+	mlx_loop_hook(map->interface->mlx_ptr, &key_func, map);
 	mlx_loop(map->interface->mlx_ptr);
 	mlx_terminate(map->interface->mlx_ptr);
 }

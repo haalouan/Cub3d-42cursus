@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 19:29:42 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/27 19:12:38 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:22:36 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ void	draw_player(t_map_e *map)
 	y_center = (map->player->y_p) + BLOCK_L;
 	radius = 10;
 	draw_circle(map, x_center, y_center, radius);
-	apply_dda_algorithm(map);
-	ft_malloc(0, 1);
+	// apply_dda_algorithm(map);
+	// ft_malloc(0, 1);
 }

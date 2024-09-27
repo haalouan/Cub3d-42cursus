@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2027/09/27 13:52:59 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/27 19:07:07 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:30:51 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ extern int mapValues[20][21];
 
 int	mouvement_is_blocked(int map_y, int map_x, double angle)
 {
-	if (mapValues[map_y][map_x] == 1 || (!ray_is_facing_down(angle)
-			&& ray_is_facing_left(angle) && (mapValues[map_y][map_x + 1] == 1
-					&& mapValues[map_y + 1][map_x] == 1)) ||
+	if (mapValues[map_y][map_x] == '1' || (!ray_is_facing_down(angle)
+			&& ray_is_facing_left(angle) && (mapValues[map_y][map_x + 1] == '1'
+					&& mapValues[map_y + 1][map_x] == '1')) ||
 		(!ray_is_facing_down(angle) && !ray_is_facing_left(angle)
-				&& (mapValues[map_y][map_x - 1] == 1
-				&& mapValues[map_y + 1][map_x] == 1)) ||
+				&& (mapValues[map_y][map_x - 1] == '1'
+				&& mapValues[map_y + 1][map_x] == '1')) ||
 		(ray_is_facing_down(angle) && ray_is_facing_left(angle)
 				&& (mapValues[map_y][map_x + 1] == 1
 				&& mapValues[map_y - 1][map_x] == 1)))

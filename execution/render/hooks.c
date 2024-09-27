@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 22:13:10 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/27 19:10:51 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:30:13 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ void	update_map(t_map_e *m)
 	mlx_delete_image(m->interface->mlx_ptr, m->interface->new_img);
 	m->interface->new_img = mlx_new_image(m->interface->mlx_ptr,
 			WIDTH * BLOCK_W, BLOCK_L * HEIGHT);
-	draw_3d_walls(m);
-	draw_mini_map(m);
+	// draw_3d_walls(m);
+	// draw_mini_map(m);
+	draw_map_v1(m,m->m_values, 1);
+	draw_player(m);
 	mlx_image_to_window(m->interface->mlx_ptr, m->interface->new_img, 0, 0);
 }
 
@@ -41,7 +43,7 @@ void	terminate_game(t_map_e *m)
 	exit(1);
 }
 
-void	key_func(void *param)
+void	key_func_v1(void *param)
 {
 	t_map_e	*m;
 

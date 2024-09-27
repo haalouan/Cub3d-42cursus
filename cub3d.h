@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:52:54 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/27 19:33:03 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:28:04 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct map_v
 	char			*type;
 	struct mlx_v	*interface;
 	int				**map_values;
+	char			**m_values;
 	mlx_texture_t	**all_textures;
 	struct player_v	*player;
 	int				width;
@@ -198,4 +199,6 @@ void	*ft_malloc(size_t size, int flag);
 void	ft_lstadd_a_back(t_data **lst, t_data *new);
 t_data	*ft_lstnew_ad(void *address);
 void	draw_map(mlx_image_t *img);
+void	draw_map_v1(t_map_e *m, char **data, int flag);
+
 #endif
