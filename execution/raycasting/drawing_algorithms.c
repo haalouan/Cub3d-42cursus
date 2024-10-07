@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:18:30 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/26 22:15:02 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/07 16:52:32 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	measure_all_rays(t_map_e *m, t_ray **rays)
 
 	a_begin = m->player->angle + 30;
 	a_end = m->player->angle - 30;
-	steps = 60.0 / (WIDTH * BLOCK_W);
+	steps = (double)FOV / (m->width * BLOCK_W);
 	while (a_begin > a_end)
 	{
 		h_ray = ft_lstnew(a_begin);

@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parssing.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:58:11 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/20 17:06:44 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/10/07 16:07:58 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSSING_H
 # define PARSSING_H
-# include "../cub3d.h"
+# include "sources/libft/libft.h"
+# include <stdio.h>
+# include "sources/get_next_line/get_next_line.h"
+# include <fcntl.h>
 
 typedef struct s_map
 {

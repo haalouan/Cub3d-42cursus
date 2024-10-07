@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:06:44 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/26 16:09:20 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:21:47 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strchr(const char *str, int c);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_malloc(size_t size, int flag);
+int     ft_isalpha(int c);
 #endif

@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:52:54 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/27 22:16:36 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/07 19:06:25 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <fcntl.h>
 # include "sources/get_next_line/get_next_line.h"
 # include "sources/libft/libft.h"
-# include "parssing/parssing.h"
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -38,6 +37,7 @@
 #include <string.h>
 #include <math.h>
 #include "MLX42/include/MLX42/MLX42.h"
+# include "parssing/parssing.h"
 
 #define BLOCK_W 64
 #define BLOCK_L 64
@@ -106,6 +106,7 @@ typedef struct ray_v
 	double			angle;
 	double			x;
 	double			bitmap_offset;
+	double			tan;
 	struct ray_v	*next;
 }	t_ray;
 
@@ -128,6 +129,7 @@ typedef struct wall_v
 	int				wall_top;
 	int				wall_bot;
 	struct bitmap_v	*t;
+	double			angle;
 	struct wall_v	*next;
 }	t_wall;
 
@@ -148,6 +150,9 @@ typedef struct data_v
 	struct data_v	*next;
 }	t_data;
 
+void	init_all_values(t_map_e *m, t_map *data);
+void	init_textures(t_map_e *m, t_map *data);
+void	update_texture(t_wall *w, t_map_e *m);
 void	move_right(t_player *p, char **mapValues);
 void	move_left(t_player *p, char **mapValues);
 void	move_down(t_player *p, char **mapValues);
@@ -157,16 +162,15 @@ void	terminate_game(t_map_e *m);
 void	update_map(t_map_e *m);
 void	rotate_angle(t_player *p, int value);
 int		get_rgba(int r, int g, int b, int a);
-void	draw_block(mlx_image_t *img, int x, int y, int value);
+void	draw_block(mlx_image_t *img, int x, int y, char value);
 void	apply_dda_algorithm(t_map_e *m);
 void	draw_player(t_map_e *map);
-void	draw_mini_map(t_map_e *m);
 void	apply_dda_algorithm(t_map_e *m);
 void	draw_3d_walls(t_map_e *m);
 void	ft_lstadd_back(t_ray **lst, t_ray *new);
 void	draw_3d_map(void);
 t_ray	*ft_lstnew(double x);
-void	draw_mini_map(t_map_e *m);
+void	draw_mini_map(t_map_e *m, char **data, int flag);
 int		wall_contact(t_player *p, char **mapValues);
 int		get_map_e_value(t_player *p, int x, int y);
 void	draw_circle(t_map_e *map, int x_center, int y_center, int radius);
@@ -198,8 +202,10 @@ long	absolute_value(long a);
 void	*ft_malloc(size_t size, int flag);
 void	ft_lstadd_a_back(t_data **lst, t_data *new);
 t_data	*ft_lstnew_ad(void *address);
-void	draw_map(mlx_image_t *img);
+void	draw_map(t_map_e *m, char **data, int flag);
 void	draw_map_v1(t_map_e *m, char **data, int flag);
-int	mouvement_is_blocked(char **mapValues, int map_y, int map_x, double angle);
-
+int		mouvement_is_blocked(char **mapValues,
+			int map_y, int map_x, double angle);
+void	init_player_position(t_player *p, int i, int j, char direction);
+double	extract_angle(char d);
 #endif

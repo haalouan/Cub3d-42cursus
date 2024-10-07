@@ -6,13 +6,11 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:18:04 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/27 22:19:04 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:57:25 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-
-// extern int mapValues[10][21];
 
 int	get_rgba(int r, int g, int b, int a)
 {
@@ -52,7 +50,7 @@ void	draw_sky(t_map_e *m, int x, t_wall *w)
 	y = 0;
 	while (y < w->wall_top)
 	{
-		gradient->t = (float)y / (HEIGHT * BLOCK_L);
+		gradient->t = (float)y / (m->height * BLOCK_L);
 		r = (uint8_t)(gradient->start_r
 				+ (gradient->end_r - gradient->start_r) * gradient->t);
 		g = (uint8_t)(gradient->start_g
@@ -70,7 +68,7 @@ void	draw_floor(t_wall *w, t_map_e *m, int x)
 	int	y;
 
 	y = w->wall_bot;
-	while (y < (HEIGHT * BLOCK_L))
+	while (y < (m->height * BLOCK_L))
 	{
 		mlx_put_pixel(m->interface->new_img,
 			x, y, get_rgba(245, 222, 179, 255));

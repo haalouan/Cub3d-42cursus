@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 19:29:42 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/27 22:17:52 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:32:44 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,30 @@ void	init_player_instance(t_map_e *map3d)
 {
 	map3d->player = malloc(sizeof(t_player));
 	if (!map3d->player)
+	{
+		free(map3d);
 		exit (1);
-	map3d->player->x_p = 17 * BLOCK_W + 40;
-	map3d->player->y_p = 4 * BLOCK_L + 40;
-	map3d->player->angle = 180;
-	map3d->player->rotation_speed = 2;
+	}
 }
+
+void	init_player_position(t_player *p, int i, int j, char direction)
+{
+	p->x_p = j * BLOCK_W + 40;
+	p->y_p = i * BLOCK_L + 40;
+	p->angle = extract_angle(direction);
+}
+
+double	extract_angle(char d)
+{
+	if (d == 'E')
+		return (0);
+	if (d == 'N')
+		return (90);
+	if (d == 'W')
+		return (180);
+	return (270);
+}
+
 
 void	draw_circle(t_map_e *map, int x_center, int y_center, int radius)
 {

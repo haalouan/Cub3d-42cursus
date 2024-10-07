@@ -6,22 +6,36 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:38:26 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/26 21:13:49 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:55:49 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-extern int mapValues[20][21];
+int	row_empty(char *s)
+{
+	int	i;
+	int	empty;
+
+	i = 0;
+	empty = 1;
+	while (s[i])
+	{
+		if (s[i] != ' ' && s[i] != 9)
+			empty = 0;
+		i++;
+	}
+	return (empty);
+}
 
 
-void	draw_block(mlx_image_t *img, int x, int y, int value)
+void	draw_block(mlx_image_t *img, int x, int y, char value)
 {
 	uint32_t	color;
 	int			i;
 	int			j;
 
-	if (value == 1)
+	if (value == '1')
 		color = get_rgba(0, 0, 0, 200);
 	else
 		color = get_rgba(255, 255, 255, 255);
@@ -38,27 +52,37 @@ void	draw_block(mlx_image_t *img, int x, int y, int value)
 	}
 }
 
-void	draw_map(mlx_image_t *img)
+void	draw_map(t_map_e *m, char **data, int flag)
 {
 	int	i;
 	int	j;
+	int	k;
 
 	i = 0;
-	while (i < HEIGHT)
+	while (i < m->height)
 	{
-		j = 0;
-		while (j < WIDTH)
+		if (!row_empty(data[i]))
 		{
-			draw_block(img, (i + 1) * (BLOCK_L),
-				(j + 1) * (BLOCK_W), mapValues[i][j]);
-			j++;
+			j = 0;
+			k = ft_strlen(data[i]);
+			while (j < k && j < m->width)
+			{
+				if (data[i][j] != ' ' && data[i][j] != 9)
+				{
+					draw_block(m->interface->new_img, (i + 1) * (BLOCK_L),
+						(j + 1) * (BLOCK_W), data[i][j]);
+					if (!flag && ft_isalpha(data[i][j]))
+						init_player_position(m->player, i, j, data[i][j]);
+				}
+				j++;
+			}
 		}
 		i++;
 	}
 }
 
-void	draw_mini_map(t_map_e *m)
+void	draw_mini_map(t_map_e *m, char **data, int flag)
 {
-	draw_map(m->interface->new_img);
+	draw_map(m, data, flag);
 	draw_player(m);
 }

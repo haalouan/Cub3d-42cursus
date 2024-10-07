@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 22:13:10 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/27 22:07:23 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/07 19:02:17 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ void	update_map(t_map_e *m)
 {
 	mlx_delete_image(m->interface->mlx_ptr, m->interface->new_img);
 	m->interface->new_img = mlx_new_image(m->interface->mlx_ptr,
-			WIDTH * BLOCK_W, BLOCK_L * HEIGHT);
-	// draw_3d_walls(m);
-	// draw_mini_map(m);
-	draw_map_v1(m,m->m_values, 1);
-	draw_player(m);
+			m->width * BLOCK_W, BLOCK_L * m->height);
+	draw_3d_walls(m);
+	draw_mini_map(m,m->m_values, 1);
 	mlx_image_to_window(m->interface->mlx_ptr, m->interface->new_img, 0, 0);
 }
 
@@ -49,9 +47,9 @@ void	key_func(void *param)
 
 	m = (t_map_e *)param;
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_RIGHT))
-		rotate_angle(m->player, -6);
+		rotate_angle(m->player, -10);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_LEFT))
-		rotate_angle(m->player, 6);
+		rotate_angle(m->player, 10);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_D))
 		move_right(m->player, m->m_values);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_A))
