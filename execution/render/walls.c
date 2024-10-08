@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:57:12 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/07 19:07:50 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/08 15:07:59 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,13 @@ void	update_wall_values(t_wall *w, t_ray *rays, t_map_e *m)
 		w->t->offset_x = 0;
 	w->t->scaling_factor = ((double)w->t->texture->height / w->wall_height);
 	w->angle = rays->angle;
-	if (w->wall_top == w->wall_bot)
-	printf("angle %f with distance %d vert=%d tan %f\n", rays->angle, rays->distance, rays->hit_vertical, rays->tan);
 }
 
 void	draw_wall(t_wall *w, t_map_e *m, int x, int vertical)
 {
 	int	y;
 	int	b;
-
+	(void)vertical;
 	y = w->wall_top;
 	b = w->wall_bot;
 	w->t->offset_y = ((w->wall_top - (m->height * BLOCK_L / 2)
@@ -60,8 +58,8 @@ void	draw_wall(t_wall *w, t_map_e *m, int x, int vertical)
 		w->t->color = w->t->arr[((int)w->t->offset_y
 				* w->t->texture->width) + (int)w->t->offset_x];
 		w->t->color = convert_pixel_to_color(w->t->color);
-		if (vertical)
-			w->t->color = (w->t->color >> 1) & 8355711;
+		// if (vertical)
+		// 	w->t->color = (w->t->color >> 1) & 8355711;
 		mlx_put_pixel(m->interface->new_img,
 			x, y, w->t->color);
 		w->t->offset_y += w->t->scaling_factor;

@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:18:30 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/07 16:52:32 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:38:27 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	update_angle(double *angle)
 {
 	if ((*angle) < 0)
 		(*angle) += 360;
-	if ((*angle) >= 360)
+	if ((*angle) > 360)
 		(*angle) -= 360;
 }
 

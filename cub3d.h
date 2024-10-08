@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:52:54 by haalouan          #+#    #+#             */
-/*   Updated: 2024/10/07 19:06:25 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:31:52 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct map_v
 
 typedef struct ray_v
 {
-	int				distance;
+	long				distance;
 	int				hit_vertical;
 	double			angle;
 	double			x;

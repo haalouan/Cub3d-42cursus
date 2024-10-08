@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 22:27:55 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/07 19:07:28 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:25:32 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ long	find_vertical_distance(t_map_e *m, t_ray **v, double angle)
 	update_angle(&angle);
 	vertical = ft_malloc(sizeof(t_ray_calc), 0);
 	initialise_params_for_vert_calc(vertical, angle);
+	if (isinf(vertical->tan_angle))
+		printf("infinite value for %f\n", angle);
 	init_first_vertical_inter(vertical, m, &x_inter, &y_inter);
 	while ((fabs(x_inter) <= BLOCK_W * m->width)
 		&& (fabs(y_inter) <= (BLOCK_L * m->height)))

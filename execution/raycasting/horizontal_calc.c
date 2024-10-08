@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 22:23:50 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/07 19:07:38 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:24:34 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ long	find_horizontal_distance(t_map_e *m, t_ray **h, double angle)
 	int			map_x;
 	int			map_y;
 
+	if (angle == 180.0)
+		return (1);
 	horiz = ft_malloc(sizeof(t_ray_calc), 0);
 	update_angle(&angle);
 	initialise_params_for_hor_calc(horiz, angle);
