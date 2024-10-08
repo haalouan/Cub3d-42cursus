@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:18:04 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/07 15:57:25 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:29:01 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	draw_sky(t_map_e *m, int x, t_wall *w)
 		b = (uint8_t)(gradient->start_b
 				+ (gradient->end_b - gradient->start_b) * gradient->t);
 		mlx_put_pixel(m->interface->new_img, x, y, get_rgba(r, g, b, 255));
+		// mlx_put_pixel(m->interface->new_img, x, y, m->ceiling);
 		y++;
 	}
 	free(gradient);
@@ -71,7 +72,7 @@ void	draw_floor(t_wall *w, t_map_e *m, int x)
 	while (y < (m->height * BLOCK_L))
 	{
 		mlx_put_pixel(m->interface->new_img,
-			x, y, get_rgba(245, 222, 179, 255));
+			x, y, m->floor);
 		y++;
 	}
 }

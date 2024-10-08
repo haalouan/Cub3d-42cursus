@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:53:35 by haalouan          #+#    #+#             */
-/*   Updated: 2024/10/08 14:48:28 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:20:27 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	start_game(t_map *data)
 {
 	t_map_e	*map;
 
-	map = (t_map_e *)malloc(sizeof(t_map));
+	map = (t_map_e *)malloc(sizeof(t_map_e));
 	if (!map)
 		exit (1);
 	init_all_values(map, data);

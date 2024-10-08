@@ -1,5 +1,5 @@
 SRCS =	ft_strchr.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strncmp.c ft_strtrim.c ft_memcpy.c abs.c min.c  \
-ft_lstadd_back.c ft_lstnew.c ft_free.c ft_isalpha.c
+ft_lstadd_back.c ft_lstnew.c ft_free.c ft_isalpha.c ft_split.c ft_atoi.c
 
 NAME = libft.a
 CC = cc

@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:08:52 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/07 16:14:01 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:32:13 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,31 @@ static void	init_interface(t_map_e *m)
 		free(m);
 		exit (1);
 	}
+}
 
+uint32_t	extract_color(char *c)
+{
+	char		**split;
+	uint8_t		r;
+	uint8_t		g;
+	uint8_t		b;
+
+	split = ft_split(c, ',');
+	if (!split)
+	{
+		ft_malloc(0, 1);
+		exit(1);
+	}
+	r = ft_atoi(split[0]);
+	g = ft_atoi(split[1]);
+	b = ft_atoi(split[2]);
+	return ((uint32_t)get_rgba(r, g, b, 100));
+}
+
+void	init_colors(t_map_e *m, char *f, char *c)
+{
+	m->floor = extract_color(f);
+	m->ceiling = extract_color(c);
 }
 
 void	init_all_values(t_map_e *m, t_map *data)
@@ -73,6 +97,7 @@ void	init_all_values(t_map_e *m, t_map *data)
 	init_textures(m, data);
 	init_player_instance(m);
 	calculate_dimensions(m, data);
+	init_colors(m, data->f, data->c);
 	m->m_values = data->map;
 	init_interface(m);
 }

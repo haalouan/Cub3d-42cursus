@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:52:54 by haalouan          #+#    #+#             */
-/*   Updated: 2024/10/08 14:31:52 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:32:44 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,19 @@ typedef struct map_v
 	struct player_v	*player;
 	int				width;
 	int				height;
+	uint32_t		floor;
+	uint32_t		ceiling;
 }	t_map_e;
 
 typedef struct ray_v
 {
 	long				distance;
-	int				hit_vertical;
-	double			angle;
-	double			x;
-	double			bitmap_offset;
-	double			tan;
-	struct ray_v	*next;
+	int					hit_vertical;
+	double				angle;
+	double				x;
+	double				bitmap_offset;
+	double				tan;
+	struct ray_v		*next;
 }	t_ray;
 
 typedef struct bitmap_v

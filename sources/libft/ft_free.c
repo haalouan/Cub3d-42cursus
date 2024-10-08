@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 15:19:17 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/26 16:55:06 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/08 18:49:32 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	ft_add_new_a_data(t_data **list, void *address)
 		exit (1);
 	ft_lstadd_a_back(list, new);
 }
-
 
 void	*ft_malloc(size_t size, int flag)
 {
