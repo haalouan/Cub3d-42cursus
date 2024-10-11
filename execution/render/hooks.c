@@ -6,13 +6,13 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 22:13:10 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/08 18:38:04 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/11 20:00:28 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	rotate_angle(t_player *p, int value)
+static void	rotate_angle(t_player *p, int value)
 {
 	p->angle += value;
 	if (p->angle >= 360)
@@ -21,13 +21,13 @@ void	rotate_angle(t_player *p, int value)
 		p->angle += 360;
 }
 
-void	update_map(t_map_e *m)
+static void	update_map(t_map_e *m)
 {
 	mlx_delete_image(m->interface->mlx_ptr, m->interface->new_img);
 	m->interface->new_img = mlx_new_image(m->interface->mlx_ptr,
 			m->width * BLOCK_W, BLOCK_L * m->height);
 	draw_3d_walls(m);
-	draw_mini_map(m,m->m_values, 1);
+	draw_mini_map(m, m->m_values, 1);
 	mlx_image_to_window(m->interface->mlx_ptr, m->interface->new_img, 0, 0);
 }
 
@@ -47,9 +47,9 @@ void	key_func(void *param)
 
 	m = (t_map_e *)param;
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_RIGHT))
-		rotate_angle(m->player, -16);
+		rotate_angle(m->player, -13);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_LEFT))
-		rotate_angle(m->player, 16);
+		rotate_angle(m->player, 13);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_D))
 		move_right(m->player, m->m_values);
 	if (mlx_is_key_down(m->interface->mlx_ptr, MLX_KEY_A))

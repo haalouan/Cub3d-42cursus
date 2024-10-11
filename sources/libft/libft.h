@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:06:44 by haalouan          #+#    #+#             */
-/*   Updated: 2024/10/08 19:06:15 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/11 20:15:14 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	*ft_malloc(size_t size, int flag);
 int		ft_isalpha(int c);
 char	**ft_split(char const *s, char c);
 int		ft_atoi(const char *str);
+int		absolute_value(int a);
 #endif

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 15:56:03 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/08 18:34:10 by shamdoun         ###   ########.fr       */
+/*   Created: 2024/10/07 18:56:03 by shamdoun          #+#    #+#             */
+/*   Updated: 2024/10/11 18:53:47 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	move_up(t_player *p, char **mapValues)
 
 	old_x = p->x_p;
 	old_y = p->y_p;
-	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180)) * 25;
-	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180)) * 25;
+	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180)) * 18;
+	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180)) * 18;
 	if (wall_contact(p, mapValues))
 	{
 		p->x_p = old_x;
@@ -63,8 +63,8 @@ void	move_down(t_player *p, char **mapValues)
 
 	old_x = p->x_p;
 	old_y = p->y_p;
-	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180)) * -25;
-	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180)) * -25;
+	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180)) * -18;
+	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180)) * -18;
 	if (wall_contact(p, mapValues))
 	{
 		p->x_p = old_x;
@@ -79,8 +79,8 @@ void	move_right(t_player *p, char **mapValues)
 
 	old_x = p->x_p;
 	old_y = p->y_p;
-	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180) + (M_PI / 2)) * 25;
-	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180) + (M_PI / 2)) * 25;
+	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180) + (M_PI / 2)) * 18;
+	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180) + (M_PI / 2)) * 18;
 	if (wall_contact(p, mapValues))
 	{
 		p->x_p = old_x;
@@ -95,8 +95,8 @@ void	move_left(t_player *p, char **mapValues)
 
 	old_x = p->x_p;
 	old_y = p->y_p;
-	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180) - (M_PI / 2)) * 25;
-	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180) - (M_PI / 2)) * 25;
+	p->x_p = p->x_p + cos(-p->angle * (M_PI / 180) - (M_PI / 2)) * 18;
+	p->y_p = p->y_p + sin(-p->angle * (M_PI / 180) - (M_PI / 2)) * 18;
 	if (wall_contact(p, mapValues))
 	{
 		p->x_p = old_x;

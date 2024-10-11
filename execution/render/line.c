@@ -6,23 +6,13 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 22:21:24 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/09/26 14:14:55 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/11 20:01:33 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	init_gradient(t_gradient *gradient)
-{
-	gradient->start_r = 135;
-	gradient->start_g = 206;
-	gradient->start_b = 235;
-	gradient->end_r = 0;
-	gradient->end_g = 0;
-	gradient->end_b = 139;
-}
-
-void	init_vector_values(t_line *line, t_map_e *m,
+static void	init_vector_values(t_line *line, t_map_e *m,
 		long h_distance, double angle)
 {
 	line->x = m->player->x_p + BLOCK_W;

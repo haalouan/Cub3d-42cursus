@@ -6,13 +6,13 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 22:27:55 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/08 14:25:32 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/11 19:59:31 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	initialise_params_for_vert_calc(t_ray_calc *vertical, double angle)
+static void	initialise_params_for_vert_calc(t_ray_calc *vertical, double angle)
 {
 	vertical->tan_angle = tan(angle * (M_PI / 180));
 	vertical->verif_x = angle > 90 && angle < 270;
@@ -31,7 +31,7 @@ void	initialise_params_for_vert_calc(t_ray_calc *vertical, double angle)
 		vertical->ay *= -1;
 }
 
-void	init_first_vertical_inter(t_ray_calc *vertical, t_map_e *m,
+static void	init_first_vertical_inter(t_ray_calc *vertical, t_map_e *m,
 	double *x_inter, double *y_inter)
 {
 	if (!vertical->verif_x)
@@ -44,17 +44,16 @@ void	init_first_vertical_inter(t_ray_calc *vertical, t_map_e *m,
 
 long	find_vertical_distance(t_map_e *m, t_ray **v, double angle)
 {
-	double		x_inter;
-	double		y_inter;	
-	t_ray_calc	*vertical;
-	int			map_x;
-	int			map_y;
+	double				x_inter;
+	double				y_inter;	
+	static t_ray_calc	*vertical;
+	int					map_x;
+	int					map_y;
 
 	update_angle(&angle);
-	vertical = ft_malloc(sizeof(t_ray_calc), 0);
+	if (!vertical)
+		vertical = ft_malloc(sizeof(t_ray_calc), 0);
 	initialise_params_for_vert_calc(vertical, angle);
-	if (isinf(vertical->tan_angle))
-		printf("infinite value for %f\n", angle);
 	init_first_vertical_inter(vertical, m, &x_inter, &y_inter);
 	while ((fabs(x_inter) <= BLOCK_W * m->width)
 		&& (fabs(y_inter) <= (BLOCK_L * m->height)))
@@ -68,9 +67,6 @@ long	find_vertical_distance(t_map_e *m, t_ray **v, double angle)
 		y_inter = y_inter + vertical->ay;
 	}
 	if (v)
-	{
 		(*v)->bitmap_offset = y_inter;
-		(*v)->tan = vertical->tan_angle;
-	}
 	return (calculate_magnitude(m->player, x_inter, y_inter));
 }

@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 19:29:42 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/08 14:52:17 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/11 19:55:19 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,7 @@ void	init_player_instance(t_map_e *map3d)
 	}
 }
 
-void	init_player_position(t_player *p, int i, int j, char direction)
-{
-	p->x_p = j * BLOCK_W + 40;
-	p->y_p = i * BLOCK_L + 40;
-	p->angle = extract_angle(direction);
-}
-
-double	extract_angle(char d)
+static double	extract_angle(char d)
 {
 	if (d == 'E')
 		return (0);
@@ -40,8 +33,14 @@ double	extract_angle(char d)
 	return (270);
 }
 
+void	init_player_position(t_player *p, int i, int j, char direction)
+{
+	p->x_p = j * BLOCK_W + 40;
+	p->y_p = i * BLOCK_L + 40;
+	p->angle = extract_angle(direction);
+}
 
-void	draw_circle(t_map_e *map, int x_center, int y_center, int radius)
+static void	draw_circle(t_map_e *map, int x_center, int y_center, int radius)
 {
 	int	dx;
 	int	dy;
@@ -75,5 +74,4 @@ void	draw_player(t_map_e *map)
 	radius = 10;
 	draw_circle(map, x_center, y_center, radius);
 	apply_dda_algorithm(map);
-	ft_malloc(0, 1);
 }

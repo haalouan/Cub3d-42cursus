@@ -6,12 +6,11 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:08:52 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/08 19:32:13 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/11 20:21:51 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
 
 static void	calculate_dimensions(t_map_e *m, t_map *data)
 {
@@ -86,7 +85,7 @@ uint32_t	extract_color(char *c)
 	return ((uint32_t)get_rgba(r, g, b, 100));
 }
 
-void	init_colors(t_map_e *m, char *f, char *c)
+static void	init_colors(t_map_e *m, char *f, char *c)
 {
 	m->floor = extract_color(f);
 	m->ceiling = extract_color(c);

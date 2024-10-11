@@ -6,13 +6,13 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:53:35 by haalouan          #+#    #+#             */
-/*   Updated: 2024/10/08 19:20:27 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/11 19:50:31 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	start_game(t_map *data)
+static void	start_game(t_map *data)
 {
 	t_map_e	*map;
 
@@ -34,6 +34,8 @@ void	start_game(t_map *data)
 	mlx_loop_hook(map->interface->mlx_ptr, &key_func, map);
 	mlx_loop(map->interface->mlx_ptr);
 	mlx_terminate(map->interface->mlx_ptr);
+	free(map);
+	ft_malloc(0, 1);
 }
 
 int	main(int arc, char **arv)

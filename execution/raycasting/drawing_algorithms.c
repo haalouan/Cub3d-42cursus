@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:18:30 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/08 14:38:27 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/11 19:55:52 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,23 @@ void	update_angle(double *angle)
 		(*angle) -= 360;
 }
 
-void	choose_closest_distance(t_ray **rays, t_ray *v_ray, t_ray *h_ray)
+static t_ray	*shortest_distance(t_ray *v_ray, t_ray *h_ray)
 {
 	if (h_ray->distance > v_ray->distance)
 	{
 		v_ray->hit_vertical = 1;
-		ft_lstadd_back(rays, v_ray);
+		return (v_ray);
 	}
-	else
-	{
-		h_ray->hit_vertical = 0;
-		ft_lstadd_back(rays, h_ray);
-	}
+	h_ray->hit_vertical = 0;
+	return (h_ray);
 }
 
-void	measure_all_rays(t_map_e *m, t_ray **rays)
+static t_ray	*find_distance(t_map_e *m, double a_begin)
 {
-	t_ray	*h_ray;
-	t_ray	*v_ray;
-	double	a_begin;
-	double	a_end;
-	double	steps;
+	static t_ray	*h_ray;
+	static t_ray	*v_ray;
 
-	a_begin = m->player->angle + 30;
-	a_end = m->player->angle - 30;
-	steps = (double)FOV / (m->width * BLOCK_W);
-	while (a_begin > a_end)
+	if (!h_ray && !v_ray)
 	{
 		h_ray = ft_lstnew(a_begin);
 		if (!h_ray)
@@ -53,9 +44,36 @@ void	measure_all_rays(t_map_e *m, t_ray **rays)
 		v_ray = ft_lstnew(a_begin);
 		if (!v_ray)
 			exit(1);
-		h_ray->distance = find_horizontal_distance(m, &h_ray, a_begin);
-		v_ray->distance = find_vertical_distance(m, &v_ray, a_begin);
-		choose_closest_distance(rays, v_ray, h_ray);
+	}
+	else
+	{
+		h_ray->angle = a_begin;
+		v_ray->angle = a_begin;
+	}
+	h_ray->angle = a_begin;
+	v_ray->angle = a_begin;
+	h_ray->distance = find_horizontal_distance(m, &h_ray, a_begin);
+	v_ray->distance = find_vertical_distance(m, &v_ray, a_begin);
+	return (shortest_distance(v_ray, h_ray));
+}
+
+void	draw_all_walls(t_map_e *m, t_wall *w)
+{
+	t_ray			*r;
+	double			a_begin;
+	double			a_end;
+	int				x;
+	double			steps;
+
+	x = 0;
+	a_begin = m->player->angle + 30;
+	a_end = m->player->angle - 30;
+	steps = (double)FOV / (m->width * BLOCK_W);
+	while (a_begin > a_end)
+	{
+		r = find_distance(m, a_begin);
+		render_wall(m, r, w, x);
 		a_begin -= steps;
+		x++;
 	}
 }

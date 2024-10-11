@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:13:55 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/07 16:15:26 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/11 20:20:54 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	init_textures(t_map_e *m, t_map *data)
 		|| !(m->all_textures[2]) || !(m->all_textures[3]))
 		exit (1);
 }
-
 
 void	update_texture(t_wall *w, t_map_e *m)
 {

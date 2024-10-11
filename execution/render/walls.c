@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:57:12 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/08 15:07:59 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/11 21:01:03 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,35 @@
 
 void	init_wall_values(t_map_e *m, t_wall *w)
 {
-	w->t = ft_malloc(sizeof(t_bitmap), 0);
 	w->distance_to_projection = (m->width * BLOCK_W / 2)
 		/ tan(FOV / 2 * (M_PI / 180));
 }
 
+void	update_t(t_wall *w, t_ray *rays, t_map_e *m)
+{
+	double angle = fmod(m->player->angle - rays->angle, 360);
+	// double angle = rays->angle;
+	if (rays->hit_vertical)
+	{
+		if (angle >= 0 && angle < 90)
+			w->t->texture = m->all_textures[0];
+		else
+			w->t->texture = m->all_textures[2];
+	}
+	else
+	{
+		if (angle >= 0 && angle < 180)
+			w->t->texture = m->all_textures[3];
+		else
+			w->t->texture = m->all_textures[1];
+	}
+	w->t->arr = (uint32_t *)w->t->texture->pixels;
+}
+
 void	update_wall_values(t_wall *w, t_ray *rays, t_map_e *m)
 {
-	update_texture(w, m);
+	// update_texture(w, m);
+	update_t(w, rays, m);
 	w->distance = rays->distance;
 	w->distance = cos((m->player->angle - rays->angle)
 			* (M_PI / 180)) * w->distance;
@@ -31,7 +52,6 @@ void	update_wall_values(t_wall *w, t_ray *rays, t_map_e *m)
 	if (w->wall_top < 0 || (w->wall_top > m->height * BLOCK_L))
 		w->wall_top = 0;
 	w->wall_bot = ((BLOCK_L * m->height) / 2) + ((w->wall_height / 2));
-	//!TODO: fix wall_bot value!
 	if (absolute_value(w->wall_bot) > m->height * BLOCK_L)
 		w->wall_bot = m->height * BLOCK_L;
 	w->t->offset_x = (int)((rays->bitmap_offset)
@@ -46,6 +66,7 @@ void	draw_wall(t_wall *w, t_map_e *m, int x, int vertical)
 {
 	int	y;
 	int	b;
+
 	(void)vertical;
 	y = w->wall_top;
 	b = w->wall_bot;
@@ -67,36 +88,25 @@ void	draw_wall(t_wall *w, t_map_e *m, int x, int vertical)
 	}
 }
 
-void	render_all_walls(t_map_e *m, t_ray *rays, t_wall *w)
+void	render_wall(t_map_e *m, t_ray *ray, t_wall *w, int x)
 {
-	int		x;
-
-	x = 0;
-	while (rays)
-	{
-		update_wall_values(w, rays, m);
-		draw_sky(m, x, w);
-		draw_wall(w, m, x, rays->hit_vertical);
-		draw_floor(w, m, x);
-		rays = rays->next;
-		x += 1;
-	}
+	update_wall_values(w, ray, m);
+	draw_sky(m, x, w);
+	draw_wall(w, m, x, ray->hit_vertical);
+	draw_floor(w, m, x);
 }
 
 void	draw_3d_walls(t_map_e *m)
 {
 	static t_wall	*w;
-	t_ray			*rays;
 
-	rays = ft_malloc(sizeof(t_ray), 0);
-	if (!rays)
-		exit (1);
-	rays = NULL;
-	measure_all_rays(m, &rays);
-	w = ft_malloc(sizeof(t_wall), 0);
 	if (!w)
-		exit(1);
+	{
+		w = malloc(sizeof(t_wall));
+		if (!w)
+			exit(1);
+		w->t = malloc(sizeof(t_bitmap));
+	}
 	init_wall_values(m, w);
-	render_all_walls(m, rays, w);
-	ft_malloc(0, 1);
+	draw_all_walls(m, w);
 }

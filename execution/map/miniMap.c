@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:38:26 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/08 18:47:53 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/11 20:20:16 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	row_empty(char *s)
 	}
 	return (empty);
 }
-
 
 void	draw_block(mlx_image_t *img, int x, int y, char value)
 {
