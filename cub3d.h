@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:52:54 by haalouan          #+#    #+#             */
-/*   Updated: 2024/10/11 20:19:17 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/13 19:47:29 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ typedef struct ray_calc_v
 
 typedef struct line_vector
 {
-	int	line_length;
-	int	x;
-	int	y;
-	int	x1;
-	int	y1;
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	e2;
+	long	line_length;
+	int		x;
+	int		y;
+	int		x1;
+	int		y1;
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		err;
+	int		e2;
 }	t_line;
 
 typedef struct player_v
@@ -92,6 +92,7 @@ typedef struct ray_v
 	double				bitmap_offset;
 	double				tan;
 	struct ray_v		*next;
+	struct ray_v		*previous;
 }	t_ray;
 
 typedef struct bitmap_v
@@ -106,12 +107,12 @@ typedef struct bitmap_v
 
 typedef struct wall_v
 {
-	float			distance;
+	long			distance;
 	long			distance_to_projection;
 	double			height;
-	int				wall_height;
-	int				wall_top;
-	int				wall_bot;
+	long			wall_height;
+	long			wall_top;
+	long			wall_bot;
 	struct bitmap_v	*t;
 	double			angle;
 	struct wall_v	*next;
@@ -125,7 +126,7 @@ typedef struct data_v
 
 void	init_all_values(t_map_e *m, t_map *data);
 void	init_textures(t_map_e *m, t_map *data);
-void	update_texture(t_wall *w, t_map_e *m);
+void	update_texture(t_wall *w, t_ray *rays, t_map_e *m);
 void	move_right(t_player *p, char **mapValues);
 void	move_left(t_player *p, char **mapValues);
 void	move_down(t_player *p, char **mapValues);
@@ -142,7 +143,7 @@ void	ft_lstadd_back(t_ray **lst, t_ray *new);
 t_ray	*ft_lstnew(double x);
 void	draw_mini_map(t_map_e *m, char **data, int flag);
 int		wall_contact(t_player *p, char **mapValues);
-void	init_player_instance(t_map_e *map3d);
+void	init_player_instance(t_map_e *map3d, t_map *data);
 void	my_put_mlx(t_map_e *map, int x, int y);
 int		convert_pixel_to_color(uint32_t color);
 void	draw_sky(t_map_e *m, int x, t_wall *w);
@@ -166,5 +167,7 @@ int		mouvement_is_blocked(char **mapValues,
 void	init_player_position(t_player *p, int i, int j, char direction);
 void	draw_all_walls(t_map_e *m, t_wall *w);
 void	render_wall(t_map_e *m, t_ray *ray, t_wall *w, int x);
-
+void	free_all_exit(t_map_e *map, t_map *data);
+void	close_function(void *param);
+void	allocate_cal_struc(t_ray_calc	**cal);
 #endif

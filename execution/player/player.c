@@ -6,20 +6,17 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 19:29:42 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/11 19:55:19 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/13 19:09:08 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	init_player_instance(t_map_e *map3d)
+void	init_player_instance(t_map_e *map3d, t_map *data)
 {
-	map3d->player = malloc(sizeof(t_player));
+	map3d->player = ft_malloc(sizeof(t_player), 0);
 	if (!map3d->player)
-	{
-		free(map3d);
-		exit (1);
-	}
+		free_all_exit(map3d, data);
 }
 
 static double	extract_angle(char d)

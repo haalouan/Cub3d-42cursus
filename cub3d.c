@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:53:35 by haalouan          #+#    #+#             */
-/*   Updated: 2024/10/11 19:50:31 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/13 19:46:39 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,17 @@ static void	start_game(t_map *data)
 
 	map = (t_map_e *)malloc(sizeof(t_map_e));
 	if (!map)
+	{
+		free_map(data);
 		exit (1);
+	}
 	init_all_values(map, data);
 	draw_mini_map(map, data->map, 0);
 	if (mlx_image_to_window(map->interface->mlx_ptr,
 			map->interface->new_img, 0, 0))
-	{
-		free(map->player);
-		free(map->interface->mlx_ptr);
-		free(map->interface->new_img);
-		free(map->interface);
-		free(map);
-		exit (1);
-	}
+		free_all_exit(map, data);
 	mlx_loop_hook(map->interface->mlx_ptr, &key_func, map);
+	mlx_close_hook(map->interface->mlx_ptr, &close_function, map);
 	mlx_loop(map->interface->mlx_ptr);
 	mlx_terminate(map->interface->mlx_ptr);
 	free(map);

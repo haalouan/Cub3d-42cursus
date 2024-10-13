@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 22:27:55 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/11 19:59:31 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/13 19:42:26 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ long	find_vertical_distance(t_map_e *m, t_ray **v, double angle)
 
 	update_angle(&angle);
 	if (!vertical)
-		vertical = ft_malloc(sizeof(t_ray_calc), 0);
+		allocate_cal_struc(&vertical);
 	initialise_params_for_vert_calc(vertical, angle);
 	init_first_vertical_inter(vertical, m, &x_inter, &y_inter);
-	while ((fabs(x_inter) <= BLOCK_W * m->width)
-		&& (fabs(y_inter) <= (BLOCK_L * m->height)))
+	while (x_inter >= 0 && y_inter >= 0
+		&& x_inter <= (BLOCK_W * m->width) && y_inter <= (BLOCK_L * m->height))
 	{
 		map_x = (int)floor(fabs(x_inter) / BLOCK_W);
 		map_y = (int)floor(fabs(y_inter) / BLOCK_L);
