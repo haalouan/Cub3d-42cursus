@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 22:23:50 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/13 19:41:49 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:12:02 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	init_first_hor_inter(t_ray_calc *hor, t_map_e *m,
 	if (hor->verif_y)
 		(*y_inter) = floor(m->player->y_p / BLOCK_L) * BLOCK_L + BLOCK_L;
 	else
-		(*y_inter) = floor(m->player->y_p / BLOCK_L) * BLOCK_L - 1;
+		(*y_inter) = floor(m->player->y_p / BLOCK_L) * BLOCK_L - 0.0001;
 	(*x_inter) = m->player->x_p
 		+ (m->player->y_p - (*y_inter)) / hor->tan_angle;
 }

@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:18:30 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/13 18:42:32 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:47:04 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,32 @@ void	update_angle(double *angle)
 
 static t_ray	*shortest_distance(t_ray *v_ray, t_ray *h_ray)
 {
+	// double directionX, directionY;
+
+	update_angle(&h_ray->angle);
 	if (h_ray->distance > v_ray->distance)
 	{
 		v_ray->hit_vertical = 1;
 		return (v_ray);
 	}
+	// if (h_ray->distance == v_ray->distance)
+	// {
+	// 	directionX = cos(h_ray->angle * M_PI / 180) * h_ray->x;	
+	// 	if (h_ray->angle >= 0 && h_ray->angle < 180)
+	// 		directionY = sin(h_ray->angle * M_PI / 180);	
+	// 	else
+	// 		directionY = sin(-h_ray->angle * M_PI / 180);	
+	// 	 if ((directionY > directionX))
+	// 	 {
+	// 		v_ray->hit_vertical = 1;
+	// 		return (v_ray);			
+	// 	 }
+	// 	 else
+	// 	 {
+	// 		h_ray->hit_vertical = 0;
+	// 		return (h_ray);
+	// 	 }
+	// }
 	h_ray->hit_vertical = 0;
 	return (h_ray);
 }
@@ -50,8 +71,6 @@ static t_ray	*find_distance(t_map_e *m, double a_begin)
 		h_ray->angle = a_begin;
 		v_ray->angle = a_begin;
 	}
-	h_ray->angle = a_begin;
-	v_ray->angle = a_begin;
 	h_ray->distance = find_horizontal_distance(m, &h_ray, a_begin);
 	v_ray->distance = find_vertical_distance(m, &v_ray, a_begin);
 	return (shortest_distance(v_ray, h_ray));
@@ -67,6 +86,7 @@ void	draw_all_walls(t_map_e *m, t_wall *w)
 
 	x = 0;
 	a_begin = m->player->angle + 30;
+	// printf("a_begin is %f\n", a_begin);
 	a_end = m->player->angle - 30;
 	steps = (double)FOV / (m->width * BLOCK_W);
 	while (a_begin > a_end)

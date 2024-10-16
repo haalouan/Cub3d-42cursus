@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 22:27:55 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/13 19:42:26 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:01:19 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	init_first_vertical_inter(t_ray_calc *vertical, t_map_e *m,
 	if (!vertical->verif_x)
 		(*x_inter) = floor(m->player->x_p / BLOCK_L) * BLOCK_L + BLOCK_L;
 	else
-		(*x_inter) = floor(m->player->x_p / BLOCK_L) * BLOCK_L - 1;
+		(*x_inter) = floor(m->player->x_p / BLOCK_L) * BLOCK_L - 0.0001;
 	(*y_inter) = m->player->y_p
 		+ ((m->player->x_p - (*x_inter)) * tan(vertical->angle * (M_PI / 180)));
 }

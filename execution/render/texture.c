@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:13:55 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/13 19:46:06 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:46:35 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ void	update_texture(t_wall *w, t_ray *rays, t_map_e *m)
 {
 	double	angle;
 
-	angle = fmod(m->player->angle - rays->angle, 360);
+	angle = rays->angle;
+	update_angle(&angle);
 	if (rays->hit_vertical)
 	{
-		if (m->player->angle >= 90 && m->player->angle < 270)
-			w->t->texture = m->all_textures[2];
+		if (angle >= 90 && angle < 270)
+			w->t->texture = m->all_textures[0];
 		else
 			w->t->texture = m->all_textures[3];
 	}
 	else
 	{
-		if (angle >= 0 && angle < 90)
-			w->t->texture = m->all_textures[0];
+		if (angle >= 0 && angle < 180)
+			w->t->texture = m->all_textures[2];
 		else
 			w->t->texture = m->all_textures[1];
 	}
