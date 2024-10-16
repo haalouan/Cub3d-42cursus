@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:56:23 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/20 16:54:39 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:26:19 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,11 @@ void	check_map(char **str)
 			&& ft_strncmp(str[i] + k, "WE", 2) != 0
 			&& ft_strncmp(str[i] + k, "C", 1) != 0
 			&& ft_strncmp(str[i] + k, "F", 1) != 0
-			&& str[i][k] != '1' && str[i][k] != '\n')
+			&& str[i][k] != '1' && str[i][k] != '\n'
+			&& str[i][k] != ' ' && str[i][k] != '\t')
 		{
 			free_all_lines(str);
-			exit(printf("ERROR IN MAP (unaccpected character)\n"));
+			exit(printf("ERROR IN MAP\n"));
 		}
 		i++;
 	}

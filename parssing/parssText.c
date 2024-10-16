@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:43:56 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/20 16:53:57 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:27:20 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	put_c(char **str, t_map *textures)
 	while (str && str[i] && str[i][0] != '1')
 	{
 		str[i] = escape_spaces(str[i]);
-		if (ft_strncmp(str[i], "C", 1) == 0)
+		if (ft_strncmp(str[i], "C", 1) == 0 && (str[i][1] == ' ' || str[i][1] == '\t'))
 		{
 			flag++;
 			save = i;
@@ -52,12 +52,6 @@ void	put_0_1(char **str, t_map *textures)
 	textures->map = allocate_map(count_map(str + i));
 	while (str && str[i])
 	{
-		if (str[i][0] == '\n')
-		{
-			free_all_lines(str);
-			free_map(textures);
-			exit(printf("Error (Empty line in Map)\n"));
-		}
 		save = ft_strdup(str[i]);
 		re = ft_strtrim(save, "\n");
 		free(save);
@@ -76,6 +70,7 @@ void	parsse_textures(char **str, t_map *textures)
 	put_ea(str, textures);
 	put_f(str, textures);
 	put_c(str, textures);
+	check_f_c(str, textures);
 	put_0_1(str, textures);
 }
 

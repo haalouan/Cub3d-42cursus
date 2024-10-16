@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:53:33 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/20 16:51:57 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:11:07 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	put_so(char **str, t_map *textures)
 		str[i] = escape_spaces(str[i]);
 		if (ft_strncmp(str[i], "SO", 2) == 0)
 		{
+			if (str[i][2] != ' ' && str[i][2] != '\t')
+				manage_error(str, textures);
 			flag++;
 			save = i;
 		}
@@ -53,6 +55,8 @@ void	put_no(char **str, t_map *textures)
 		str[i] = escape_spaces(str[i]);
 		if (ft_strncmp(str[i], "NO", 2) == 0)
 		{
+			if (str[i][2] != ' ' && str[i][2] != '\t')
+				manage_error(str, textures);
 			flag++;
 			save = i;
 		}
@@ -80,6 +84,8 @@ void	put_we(char **str, t_map *textures)
 		str[i] = escape_spaces(str[i]);
 		if (ft_strncmp(str[i], "WE", 2) == 0)
 		{
+			if (str[i][2] != ' ' && str[i][2] != '\t')
+				manage_error(str, textures);
 			flag++;
 			save = i;
 		}
@@ -107,6 +113,8 @@ void	put_ea(char **str, t_map *textures)
 		str[i] = escape_spaces(str[i]);
 		if (ft_strncmp(str[i], "EA", 2) == 0)
 		{
+			if (str[i][2] != ' ' && str[i][2] != '\t')
+				manage_error(str, textures);
 			flag++;
 			save = i;
 		}
@@ -134,6 +142,8 @@ void	put_f(char **str, t_map *textures)
 		str[i] = escape_spaces(str[i]);
 		if (ft_strncmp(str[i], "F", 1) == 0)
 		{
+			if (str[i][1] != ' ' && str[i][1] != '\t')
+				manage_error(str, textures);
 			flag++;
 			save = i;
 		}

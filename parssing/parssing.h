@@ -6,7 +6,7 @@
 /*   By: haalouan <haalouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:58:11 by haalouan          #+#    #+#             */
-/*   Updated: 2024/09/20 17:06:44 by haalouan         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:57:23 by haalouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	check_dup(char **all_lines, t_map *textures);
 void	manage_error(char **str, t_map *textures);
 void	put_c(char **str, t_map *textures);
 void	put_0_1(char **str, t_map *textures);
-void	parsse_textures(char **str, t_map *textures);//
+void	parsse_textures(char **str, t_map *textures);
 char	*escape_spaces(char *str);
 char	*put_map(char *str, int plus);
 void	put_so(char **str, t_map *textures);
@@ -62,5 +62,9 @@ void	put_ea(char **str, t_map *textures);
 void	put_f(char **str, t_map *textures);
 void	check_dup(char **all_lines, t_map *textures);
 void	protecte_map(char **all_lines, t_map *textures, int i, int k);
+void	check_f_c(char **str, t_map *textures);
+void	continue_check_f_c(char **str, t_map *textures, char *s);
+void	continue_f_c(char **str, t_map *textures, char *s, int *j);
+char	*ft_copy(char *str, size_t start, size_t end);
 
 #endif
