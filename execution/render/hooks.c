@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 22:13:10 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/11 20:00:28 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/18 13:12:24 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	update_map(t_map_e *m)
 {
 	mlx_delete_image(m->interface->mlx_ptr, m->interface->new_img);
 	m->interface->new_img = mlx_new_image(m->interface->mlx_ptr,
-			m->width * BLOCK_W, BLOCK_L * m->height);
-	draw_3d_walls(m);
+			W_WIDTH * BLOCK_W, W_HEIGHT * BLOCK_L);
+	// draw_3d_walls(m);
 	draw_mini_map(m, m->m_values, 1);
 	mlx_image_to_window(m->interface->mlx_ptr, m->interface->new_img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:52:54 by haalouan          #+#    #+#             */
-/*   Updated: 2024/10/13 19:47:29 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/19 17:50:30 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@
 
 # define BLOCK_W 64
 # define BLOCK_L 64
+# define W_HEIGHT 20
+# define M_M_H 4
+# define M_M_W 4
+# define W_WIDTH 20
 # define FOV 60
+# define BORDER_WIDTH 4
 
 typedef struct mlx_v
 {
@@ -85,7 +90,7 @@ typedef struct map_v
 
 typedef struct ray_v
 {
-	long				distance;
+	double				distance;
 	int					hit_vertical;
 	double				angle;
 	double				x;
@@ -107,12 +112,12 @@ typedef struct bitmap_v
 
 typedef struct wall_v
 {
-	long			distance;
-	long			distance_to_projection;
+	double			distance;
+	double			distance_to_projection;
 	double			height;
-	long			wall_height;
-	long			wall_top;
-	long			wall_bot;
+	double			wall_height;
+	double			wall_top;
+	double			wall_bot;
 	struct bitmap_v	*t;
 	double			angle;
 	struct wall_v	*next;
@@ -124,6 +129,15 @@ typedef struct data_v
 	struct data_v	*next;
 }	t_data;
 
+typedef struct minimap_v
+{
+	int begin_x;
+	int begin_y;
+	int end_x;
+	int end_y;
+} t_minimap;
+
+
 void	init_all_values(t_map_e *m, t_map *data);
 void	init_textures(t_map_e *m, t_map *data);
 void	update_texture(t_wall *w, t_ray *rays, t_map_e *m);
@@ -134,7 +148,9 @@ void	move_up(t_player *p, char **mapValues);
 void	key_func(void *param);
 void	terminate_game(t_map_e *m);
 int		get_rgba(int r, int g, int b, int a);
-void	draw_block(mlx_image_t *img, int x, int y, char value);
+void	draw_block(t_map_e *m
+, int x, int y, char value, t_minimap *mini);
+uint32_t cast_to_minimap(int old_v, int o_l, int o_m, int flag);
 void	apply_dda_algorithm(t_map_e *m);
 void	draw_player(t_map_e *map);
 void	apply_dda_algorithm(t_map_e *m);
@@ -142,6 +158,7 @@ void	draw_3d_walls(t_map_e *m);
 void	ft_lstadd_back(t_ray **lst, t_ray *new);
 t_ray	*ft_lstnew(double x);
 void	draw_mini_map(t_map_e *m, char **data, int flag);
+int		row_empty(char *s);
 int		wall_contact(t_player *p, char **mapValues);
 void	init_player_instance(t_map_e *map3d, t_map *data);
 void	my_put_mlx(t_map_e *map, int x, int y);
@@ -161,7 +178,7 @@ void	update_angle(double *angle);
 long	find_min(long a, long b);
 void	ft_lstadd_a_back(t_data **lst, t_data *new);
 t_data	*ft_lstnew_ad(void *address);
-void	draw_map(t_map_e *m, char **data, int flag);
+void	draw_map(t_map_e *m, char **data, int flag, t_minimap *mini);
 int		mouvement_is_blocked(char **mapValues,
 			int map_y, int map_x, double angle);
 void	init_player_position(t_player *p, int i, int j, char direction);

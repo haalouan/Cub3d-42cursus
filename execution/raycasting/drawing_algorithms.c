@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:18:30 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/16 17:47:04 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:19:39 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static t_ray	*shortest_distance(t_ray *v_ray, t_ray *h_ray)
 {
 	// double directionX, directionY;
 
-	update_angle(&h_ray->angle);
-	if (h_ray->distance > v_ray->distance)
+	// update_angle(&h_ray->angle);
+	if ((v_ray->distance) >= (h_ray->distance))
 	{
-		v_ray->hit_vertical = 1;
-		return (v_ray);
+		h_ray->hit_vertical = 0;
+		return (h_ray);
 	}
 	// if (h_ray->distance == v_ray->distance)
 	// {
@@ -48,8 +48,8 @@ static t_ray	*shortest_distance(t_ray *v_ray, t_ray *h_ray)
 	// 		return (h_ray);
 	// 	 }
 	// }
-	h_ray->hit_vertical = 0;
-	return (h_ray);
+	v_ray->hit_vertical = 1;
+	return (v_ray);
 }
 
 static t_ray	*find_distance(t_map_e *m, double a_begin)
@@ -86,7 +86,6 @@ void	draw_all_walls(t_map_e *m, t_wall *w)
 
 	x = 0;
 	a_begin = m->player->angle + 30;
-	// printf("a_begin is %f\n", a_begin);
 	a_end = m->player->angle - 30;
 	steps = (double)FOV / (m->width * BLOCK_W);
 	while (a_begin > a_end)

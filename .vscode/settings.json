@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "__node_handle": "c",
+        "__split_buffer": "c",
+        "array": "c",
+        "iterator": "c",
+        "string": "c",
+        "string_view": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "libft.h": "c"
+    }
+}

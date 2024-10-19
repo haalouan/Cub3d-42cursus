@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:08:52 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/13 19:15:25 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:53:28 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ static void	init_interface(t_map_e *m, t_map *data)
 	m->interface = ft_malloc(sizeof(t_map), 0);
 	if (!m->interface)
 		free_all_exit(m, data);
-	m->interface->mlx_ptr = mlx_init(m->width * BLOCK_W,
-			m->height * BLOCK_L, "overall_map", false);
+	m->interface->mlx_ptr = mlx_init(W_WIDTH * BLOCK_W,
+			W_HEIGHT * BLOCK_L, "overall_map", false);
 	if (!m->interface->mlx_ptr)
 		free_all_exit(m, data);
 	m->interface->new_img = mlx_new_image(m->interface->mlx_ptr,
-			m->width * BLOCK_W, m->height * BLOCK_L);
+			W_WIDTH * BLOCK_W, W_HEIGHT * BLOCK_L);
 	if (!m->interface->new_img)
 		free_all_exit(m, data);
 }
@@ -76,8 +76,8 @@ static void	init_colors(t_map_e *m, char *f, char *c, t_map *data)
 void	init_all_values(t_map_e *m, t_map *data)
 {
 	init_textures(m, data);
-	init_player_instance(m, data);
 	calculate_dimensions(m, data);
+	init_player_instance(m, data);
 	init_colors(m, data->f, data->c, data);
 	m->m_values = data->map;
 	init_interface(m, data);
