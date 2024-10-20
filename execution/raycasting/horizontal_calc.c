@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 22:23:50 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/16 16:12:02 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/20 17:38:58 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,14 @@ void	allocate_cal_struc(t_ray_calc	**cal)
 		exit(1);
 }
 
-long	find_horizontal_distance(t_map_e *m, t_ray **h, double angle)
+double ft_fabs(double value)
+{
+	if (value < 0)
+		return (value * -1);
+	return (value);
+}
+
+double	find_horizontal_distance(t_map_e *m, t_ray **h, double angle)
 {
 	double				x_inter;
 	double				y_inter;
@@ -66,8 +73,8 @@ long	find_horizontal_distance(t_map_e *m, t_ray **h, double angle)
 	while (x_inter >= 0 && y_inter >= 0
 		&& x_inter <= (BLOCK_W * m->width) && y_inter <= (BLOCK_L * m->height))
 	{
-		map_x = (int)floor((fabs(x_inter)) / BLOCK_W);
-		map_y = (int)floor(fabs(y_inter) / BLOCK_L);
+		map_x = (int)floor((ft_fabs(x_inter)) / BLOCK_W);
+		map_y = (int)floor(ft_fabs(y_inter) / BLOCK_L);
 		if (map_x < m->width && map_y < m->height
 			&& mouvement_is_blocked(m->m_values, map_y, map_x, angle))
 			break ;
@@ -76,5 +83,6 @@ long	find_horizontal_distance(t_map_e *m, t_ray **h, double angle)
 	}
 	if (h)
 		(*h)->bitmap_offset = x_inter;
+		// (*h)->bitmap_offset = cast_to_window(x_inter, 0, m->width * BLOCK_W, 0);
 	return (calculate_magnitude(m->player, x_inter, y_inter));
 }

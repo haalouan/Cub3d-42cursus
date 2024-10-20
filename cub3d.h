@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:52:54 by haalouan          #+#    #+#             */
-/*   Updated: 2024/10/19 17:50:30 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:19:36 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,33 @@ typedef struct player_v
 {
 	double	x_p;
 	double	y_p;
+	double old_x;
+	double old_y;
 	double	angle;
 	int		rotation_speed;
 }	t_player;
 
+typedef struct vector_v
+{
+	double x;
+	double y;
+	double inter_factor;
+	double deltaTime;
+} t_vector;
+
 typedef struct map_v
 {
-	char			*type;
-	struct mlx_v	*interface;
-	int				**map_values;
-	char			**m_values;
-	mlx_texture_t	**all_textures;
-	struct player_v	*player;
-	int				width;
-	int				height;
-	uint32_t		floor;
-	uint32_t		ceiling;
+	char					*type;
+	struct mlx_v			*interface;
+	int						**map_values;
+	char					**m_values;
+	mlx_texture_t			**all_textures;
+	struct player_v			*player;
+	int						width;
+	int						height;
+	uint32_t				floor;
+	uint32_t				ceiling;
+	struct minimap_v 		*minimap;
 }	t_map_e;
 
 typedef struct ray_v
@@ -151,8 +162,9 @@ int		get_rgba(int r, int g, int b, int a);
 void	draw_block(t_map_e *m
 , int x, int y, char value, t_minimap *mini);
 uint32_t cast_to_minimap(int old_v, int o_l, int o_m, int flag);
+double cast_to_window(double old_v, int o_l, int o_m, int flag);
 void	apply_dda_algorithm(t_map_e *m);
-void	draw_player(t_map_e *map);
+void	draw_player(t_map_e *map, t_minimap *mini);
 void	apply_dda_algorithm(t_map_e *m);
 void	draw_3d_walls(t_map_e *m);
 void	ft_lstadd_back(t_ray **lst, t_ray *new);
@@ -170,10 +182,10 @@ void	draw_floor(t_wall *w, t_map_e *m, int x);
 void	apply_dda_algorithm(t_map_e *m);
 int		ray_is_facing_left(double angle);
 int		ray_is_facing_down(double angle);
-long	calculate_magnitude(t_player *player, double x, double y);
+double	calculate_magnitude(t_player *player, double x, double y);
 void	draw_line(t_map_e *m, double angle, long h_distance);
-long	find_horizontal_distance(t_map_e *m, t_ray **h, double angle);
-long	find_vertical_distance(t_map_e *m, t_ray **v, double angle);
+double	find_horizontal_distance(t_map_e *m, t_ray **h, double angle);
+double	find_vertical_distance(t_map_e *m, t_ray **v, double angle);
 void	update_angle(double *angle);
 long	find_min(long a, long b);
 void	ft_lstadd_a_back(t_data **lst, t_data *new);
@@ -187,4 +199,5 @@ void	render_wall(t_map_e *m, t_ray *ray, t_wall *w, int x);
 void	free_all_exit(t_map_e *map, t_map *data);
 void	close_function(void *param);
 void	allocate_cal_struc(t_ray_calc	**cal);
+double ft_fabs(double value);
 #endif

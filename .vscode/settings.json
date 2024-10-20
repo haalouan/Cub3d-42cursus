@@ -8,6 +8,9 @@
         "string_view": "c",
         "unordered_map": "c",
         "vector": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "__bit_reference": "c",
+        "__hash_table": "c",
+        "initializer_list": "c"
     }
 }

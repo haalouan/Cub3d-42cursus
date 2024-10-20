@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:38:26 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/19 17:51:44 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/20 22:20:17 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,16 @@ uint32_t cast_to_minimap(int old_v, int o_l, int o_m, int flag)
 {
 	// (void)m;
 	if (flag)
-		return (((old_v - o_l)  * (M_M_W * BLOCK_L) / (o_m - o_l)));
-	return (((old_v - o_l) * (M_M_H * BLOCK_W)) / (o_m - o_l));
+		return ((BLOCK_L / 4) + ((old_v - o_l)  * ((M_M_W) * (BLOCK_L + 1) - (BLOCK_L / 4)) / (o_m - o_l)));
+	return ((BLOCK_W / 4) + ((old_v - o_l) * ((M_M_H) * (BLOCK_W + 1) - (BLOCK_W / 4)) / (o_m - o_l)));
+}
+
+double cast_to_window(double old_v, int o_l, int o_m, int flag)
+{
+	// (void)m;
+	if (flag)
+		return (((old_v - o_l)  * (W_HEIGHT * BLOCK_L) / (o_m - o_l)));
+	return (((old_v - o_l) * (W_WIDTH * BLOCK_W)) / (o_m - o_l));
 }
 
 void	draw_block(t_map_e *m, int x, int y, char value, t_minimap *mini)
@@ -53,41 +61,30 @@ void	draw_block(t_map_e *m, int x, int y, char value, t_minimap *mini)
 	int			scale_x;
 	int			scale_y;
 	
-
+(void)mini;
 	scale_x = M_M_W / m->width;
 	scale_y = M_M_H / m->height;
 
 	// printf("drawing block x %d y %d\n", y / 64, x / 64);
 	// printf("drawing x %d y %d\n", x, y);
 	if (value == '1')
-		color = get_rgba(0, 0, 0, 200);
+		color = get_rgba(32, 30, 31, 150);
 	else if (value == 9 || value == 32 || value == '5')
-		color = get_rgba(0, 100, 200, 200);
+		color = get_rgba(153, 70, 54, 50);
 	else
-		color = get_rgba(255, 255, 255, 255);
+		color = get_rgba(199, 188, 194, 255);
 	i = 0;
 	// printf("drawing block %d %d\n", x, y);
-	while (i < BLOCK_W - 1)
+	while (i < (BLOCK_W) - 1)
 	{
 		j = 0;
-		while (j < BLOCK_L - 1)
+		while (j < (BLOCK_L) - 1)
 		{
 			map_i = cast_to_minimap(x , mini->begin_x, mini->end_x, 1) + i;
-			// if (map_i < 0)
-			// 	map_i = 0;
-			// if (map_i >= M_M_H * BLOCK_L)
-			// 	map_i %= (M_M_H * BLOCK_L);
 			map_j = cast_to_minimap(y , mini->begin_y,  mini->end_y, 0) + j;
-			// if (map_j < 0)
-			// 	map_j = 0;
-			// if (map_j >= M_M_W * BLOCK_W)
-			// 	map_j %= (M_M_W * BLOCK_W);
-				// map_j = M_M_W * BLOCK_W;
-			printf("m i %d m %d\n", map_i, map_j);
-			// mlx_put_pixel(m->interface->new_img, (y + j) , (x + i), color);
-			// if (map_i <= M_M_H * BLOCK_L && map_j <= M_M_W * BLOCK_W)
-				mlx_put_pixel(m->interface->new_img, map_j , map_i, color);
-			// // mlx_put_pixel(m->interface->new_img, cast_to_minimap(m, (y + j), 1), cast_to_minimap(m, (x + i), 0), color);
+			// map_i = x + i;
+			// map_j = y + j;
+			mlx_put_pixel(m->interface->new_img, map_j , map_i, color);
 			j++;
 		}
 		i++;
@@ -140,6 +137,23 @@ void	draw_block(t_map_e *m, int x, int y, char value, t_minimap *mini)
 // }
 
 
+void transition_map_mouvement(t_vector *position, int *begin, int *l)
+{
+	if (!position)
+	{
+		position = ft_malloc(sizeof(t_vector), 0);
+		position->inter_factor = 0.0003220f;
+		position->deltaTime = 0.010f;
+		position->x = *l;
+		position->y = *begin;
+	}
+	else
+	{
+		*begin = position->y + (*begin - position->y) * position->inter_factor * position->deltaTime;	
+		*begin = position->x + (*l - position->x) * position->inter_factor * position->deltaTime;
+	}
+}
+
 void	draw_map(t_map_e *m, char **data, int flag, t_minimap *mini)
 {
 	int	i;
@@ -149,6 +163,9 @@ void	draw_map(t_map_e *m, char **data, int flag, t_minimap *mini)
 	int	k;
 	int	d;
 	int	l;
+	static t_vector *position1;
+	static t_vector *position2;
+	
 
 	begin = ((int)floor(m->player->y_p / BLOCK_L) - (M_M_H / 2));
 	if (begin < 0)
@@ -167,8 +184,9 @@ void	draw_map(t_map_e *m, char **data, int flag, t_minimap *mini)
 			l = begin_j + (M_M_W);
 			if (l > m->width)
 				l = m->width;
+			transition_map_mouvement(position1, &begin, &l);
+			transition_map_mouvement(position2, &begin_j, &d);
 			j = 0;
-			// printf("j %d l %d k %d\n", j, l, k);
 			while ((begin_j + j) < l)
 			{
 					mini->begin_x = begin * BLOCK_L;
@@ -176,20 +194,9 @@ void	draw_map(t_map_e *m, char **data, int flag, t_minimap *mini)
 					mini->end_y = l * BLOCK_L;
 					mini->end_x = d * BLOCK_L;	
 				if ((j + begin_j) < k && data[i + begin][j + begin_j] != ' ' && data[i + begin][j + begin_j] != 9)
-				// if (data[i][j] != ' ' && data[i][j] != 9)
-				{
-
-				// 	// i = cast_to_minimap(i, );
-					draw_block(m, (begin + i) * BLOCK_L, (begin_j + j) * BLOCK_W, data[i + begin][begin_j + j], mini);
-				// 	// draw_block(m->interface->new_img, (cast_to_minimap(m, i * BLOCK_L, 0) + 1),
-				// 	// (cast_to_minimap(m, j * BLOCK_W, 1) + 1) , data[i][j]);
-				// 	// if (!flag && ft_isalpha(data[i][j]))
-				// 	// 	init_player_position(m->player, i, j, data[i][j]);
-				}
+					draw_block(m, (begin + i) * (BLOCK_L), (begin_j + j) * (BLOCK_W), data[i + begin][begin_j + j], mini);
 				else
-					draw_block(m, (begin + i) * BLOCK_L, (begin_j + j) * BLOCK_W, '5', mini);
-					// draw_block(m->interface->new_img, (cast_to_minimap(m, i * BLOCK_L , 0) + 1),
-					// (cast_to_minimap(m, j * BLOCK_W , 1) + 1) , '5');
+					draw_block(m, (begin + i) * (BLOCK_L), (begin_j + j) * (BLOCK_W), '5', mini);
 				j++;
 			}
 		i++;
@@ -205,8 +212,8 @@ void	draw_rectangle(t_map_e *m)
 	
 	// i = (BLOCK_L / 2) - BORDER_WIDTH;
 	i = 0;
-	h = M_M_W * BLOCK_W + i;
-	w = M_M_H * BLOCK_L + i;
+	h = M_M_W * (BLOCK_W) + BLOCK_W / 3;
+	w = M_M_H * (BLOCK_L) + BLOCK_L / 3;
 	
 	while (i < h)
 	{
@@ -215,7 +222,7 @@ void	draw_rectangle(t_map_e *m)
 		while (j < w)
 		{
 			// if (j < BLOCK_W)
-				mlx_put_pixel(m->interface->new_img, j, i, get_rgba(255, 241, 219, 255));
+				mlx_put_pixel(m->interface->new_img, j, i, get_rgba(255, 241, 219, 20));
 			j++;
 		}
 		i++;

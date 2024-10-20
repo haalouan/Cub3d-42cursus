@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 22:21:24 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/11 20:01:33 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/20 13:04:17 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	init_vector_values(t_line *line, t_map_e *m,
 		long h_distance, double angle)
 {
-	line->x = m->player->x_p + BLOCK_W;
-	line->y = m->player->y_p + BLOCK_L;
+	line->x = cast_to_minimap(m->player->x_p, m->minimap->begin_y, m->minimap->end_y, 0);
+	line->y = cast_to_minimap(m->player->y_p, m->minimap->begin_x, m->minimap->end_x, 1);
 	line->line_length = h_distance;
 	line->x1 = line->x + cos(-angle * (M_PI / 180)) * line->line_length;
 	line->y1 = line->y + sin(-angle * (M_PI / 180)) * line->line_length;
@@ -43,8 +43,10 @@ void	draw_line(t_map_e *m, double angle, long h_distance)
 	init_vector_values(line, m, h_distance, angle);
 	while (1)
 	{
+		// mlx_put_pixel(m->interface->new_img,
+		// 	line->x / 4, line->y / 4, get_rgba(0, 0, 255, 255));
 		mlx_put_pixel(m->interface->new_img,
-			line->x / 4, line->y / 4, get_rgba(0, 0, 255, 255));
+			line->x, line->y, get_rgba(0, 0, 255, 255));
 		if (line->x == line->x1 && line->y == line->y1)
 			break ;
 		line->e2 = line->err * 2;

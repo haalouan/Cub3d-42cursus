@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 19:29:42 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/19 17:29:45 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/20 22:20:58 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ void	init_player_position(t_player *p, int i, int j, char direction)
 {
 	p->x_p = j * BLOCK_W + 40;
 	p->y_p = i * BLOCK_L + 40;
+	p->old_x = p->x_p;
+	p->old_y = p->y_p;
+
 	p->angle = extract_angle(direction);
 }
 
@@ -77,22 +80,47 @@ static void	draw_circle(t_map_e *map, int x_center, int y_center, int radius)
 			dy = j - radius;
 			if (dx * dx + dy * dy <= radius * radius)
 				my_put_mlx(map, x_center + dx, y_center + dy);
+				// mlx_put_pixel(m->interface->new_img, x_center + dx, y_center + dy)
 			j++;
 		}
 		i++;
 	}
 }
 
-void	draw_player(t_map_e *map)
+void interpolate_position(t_vector *v, t_player *player)
+{
+	if ((player->x_p != player->old_x) && (player->y_p != player->old_y))
+	{
+		v->x = player->old_x + (player->x_p - player->old_x) * v->deltaTime * v->inter_factor;
+		v->y = player->old_y + (player->y_p - player->old_y) * v->deltaTime * v->inter_factor;
+	}
+	else
+	{
+		v->x = player->old_x;
+		v->y = player->old_y;
+	}
+}
+
+void	draw_player(t_map_e *map, t_minimap *mini)
 {
 	int	x_center;
 	int	y_center;
 	int	radius;
-
-
-	x_center = (map->player->x_p) + BLOCK_W;
-	y_center = (map->player->y_p) + BLOCK_L;
+	static t_vector *position;
+	
+	if (!position)
+	{
+		position = ft_malloc(sizeof(t_vector), 0);
+		position->inter_factor = 0.02330f;
+		position->deltaTime = 0.010f;
+	}
+	interpolate_position(position, map->player);
+	x_center = cast_to_minimap(position->x, mini->begin_y, mini->end_y, 0);
+	y_center = cast_to_minimap((position->y), mini->begin_x, mini->end_x, 1);
+	// x_center = cast_to_minimap(map->player->x_p, mini->begin_y, mini->end_y, 0);
+	// y_center = cast_to_minimap((map->player->y_p), mini->begin_x, mini->end_x, 1);
 	radius = 10;
-	draw_circle(map, cast_to_minimap(x_center, 0, map->width * BLOCK_W, 1), cast_to_minimap(y_center, 0, map->height * BLOCK_L, 0), radius);
+	draw_circle(map, x_center, y_center, radius);
+	map->minimap = mini;
 	// apply_dda_algorithm(map);
 }

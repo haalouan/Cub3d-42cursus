@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:18:30 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/16 18:19:39 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/20 17:13:00 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ void	draw_all_walls(t_map_e *m, t_wall *w)
 	x = 0;
 	a_begin = m->player->angle + 30;
 	a_end = m->player->angle - 30;
-	steps = (double)FOV / (m->width * BLOCK_W);
+	steps = (double)FOV / (W_WIDTH * BLOCK_W);
 	while (a_begin > a_end)
 	{
 		r = find_distance(m, a_begin);
 		render_wall(m, r, w, x);
 		a_begin -= steps;
-		x++;
+		x += 1;
 	}
 }

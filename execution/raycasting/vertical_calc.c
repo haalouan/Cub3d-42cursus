@@ -6,7 +6,7 @@
 /*   By: shamdoun <shamdoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 22:27:55 by shamdoun          #+#    #+#             */
-/*   Updated: 2024/10/16 16:01:19 by shamdoun         ###   ########.fr       */
+/*   Updated: 2024/10/20 17:35:48 by shamdoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	init_first_vertical_inter(t_ray_calc *vertical, t_map_e *m,
 		+ ((m->player->x_p - (*x_inter)) * tan(vertical->angle * (M_PI / 180)));
 }
 
-long	find_vertical_distance(t_map_e *m, t_ray **v, double angle)
+double	find_vertical_distance(t_map_e *m, t_ray **v, double angle)
 {
 	double				x_inter;
 	double				y_inter;	
@@ -58,8 +58,8 @@ long	find_vertical_distance(t_map_e *m, t_ray **v, double angle)
 	while (x_inter >= 0 && y_inter >= 0
 		&& x_inter <= (BLOCK_W * m->width) && y_inter <= (BLOCK_L * m->height))
 	{
-		map_x = (int)floor(fabs(x_inter) / BLOCK_W);
-		map_y = (int)floor(fabs(y_inter) / BLOCK_L);
+		map_x = (int)floor(ft_fabs(x_inter) / BLOCK_W);
+		map_y = (int)floor(ft_fabs(y_inter) / BLOCK_L);
 		if (map_x < m->width && map_y < m->height
 			&& mouvement_is_blocked(m->m_values, map_y, map_x, angle))
 			break ;
@@ -68,5 +68,6 @@ long	find_vertical_distance(t_map_e *m, t_ray **v, double angle)
 	}
 	if (v)
 		(*v)->bitmap_offset = y_inter;
+		// (*v)->bitmap_offset = cast_to_window(y_inter, 0, m->height * BLOCK_L, 1);
 	return (calculate_magnitude(m->player, x_inter, y_inter));
 }
